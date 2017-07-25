@@ -14,11 +14,11 @@
   <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2017%2F07%2F25%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment 博客搭建全记录]]></content>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.Quick StartCreate a new post1$ hexo new "My New Post"More info: WritingRun server1$ hexo serverMore info: ServerGenerate static files1$ hexo generateMore info: GeneratingDeploy to remote sites1$ hexo deployMore info: Deployment博客搭建全记录]]></content>
   </entry>
   <entry>
     <title><![CDATA['Hello']]></title>
     <url>%2F2017%2F07%2F23%2FHello%2F</url>
-    <content type="text"><![CDATA[这是一篇测试hexo的文章我是一个h2的title我是文本 h3的标题我是文本 我是一个h2的title我是文本 h3的标题我是文本 h3的标题我是文本 h3的标题我是文本]]></content>
+    <content type="text"><![CDATA[这是一篇测试hexo的文章我是一个h2的title我是文本h3的标题我是文本我是一个h2的title我是文本h3的标题我是文本h3的标题我是文本h3的标题我是文本]]></content>
   </entry>
 </search>
