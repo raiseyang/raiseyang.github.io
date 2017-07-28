@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[git使用方法]]></title>
+    <url>%2F2017%2F07%2F28%2Fgit%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[创建本地分支并push到远程12345git initgit add . # 添加所有文件到git仓库，建议创建.gitignore文件过滤git commit -m &apos;提交消息&apos; # 提交代码到本地git remote add origin git@github.com:raiseyang/hexo-source-file.git # 关联远程仓库git push # push本地分支到远程仓库]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[python requests https证书配置]]></title>
     <url>%2F2017%2F07%2F25%2Fpython%E6%97%A5%E6%9C%9F%2F</url>
     <content type="text"><![CDATA[requests官方文档]]></content>
