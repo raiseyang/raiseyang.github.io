@@ -5,14 +5,14 @@
     
 <meta charset="utf-8" >
 
-<title>OMA DM资源汇总 | 指南针在摇摆</title>
+<title>OMA DM 资源汇总 | 指南针在摇摆</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1642410356004">
+<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1642593392433">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://raiseyang.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://raiseyang.github.io">
-        <img class="avatar" src="https://raiseyang.github.io/images/avatar.png?v=1642410356004" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://raiseyang.github.io/images/avatar.png?v=1642593392433" alt="" width="32px" height="32px">
       </a>
       <a href="https://raiseyang.github.io">
         <h1 class="site-title">指南针在摇摆</h1>
@@ -80,7 +80,7 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">OMA DM资源汇总</h2>
+          <h2 class="post-title">OMA DM 资源汇总</h2>
           <div class="post-info post-detail-info">
             <span><i class="icon-calendar-outline"></i> 2022-01-17</span>
             
@@ -99,44 +99,44 @@
             <h2 id="官方资料">官方资料</h2>
 <p><a href="https://technical.openmobilealliance.org/index.html">OMA Specifications（技术文档官网）</a></p>
 <blockquote>
-<p>里面包含所有OMA定义的标准文档列表；可根据自己感兴趣的资料点进去进行下载。</p>
+<p>里面包含所有 OMA 定义的标准文档列表；可根据自己感兴趣的资料点进去进行下载。</p>
 </blockquote>
 <p>下面列出一些常用的标准文档下载地址：</p>
 <blockquote>
-<p>注意：*-A结尾的版本代表正式版，直接下载-A结尾的就行了；</p>
+<p>注意：*-A 结尾的版本代表正式版，直接下载 -A 结尾的就行了；</p>
 </blockquote>
 <p><a href="https://www.openmobilealliance.org/release/Common/">OMA SyncML Common Specification</a></p>
 <blockquote>
-<p>SyncML协议相关文档</p>
+<p>SyncML 协议相关文档</p>
 </blockquote>
 <p><a href="https://www.openmobilealliance.org/release/DM">OMA Device Management (DM)</a></p>
 <blockquote>
-<p>DM协议相关文档</p>
+<p>DM 协议相关文档</p>
 </blockquote>
 <p><a href="https://www.openmobilealliance.org/release/FUMO/">OMA Firmware Update Management Object</a></p>
 <blockquote>
-<p>OTA升级相关文档</p>
+<p>OTA 升级相关文档</p>
 </blockquote>
 <h2 id="开源资料">开源资料</h2>
-<h3 id="funambol服务器">Funambol服务器</h3>
+<h3 id="funambol-服务器">Funambol 服务器</h3>
 <blockquote>
-<p>目前找到唯一开源的OMA DM相关的服务器，作为调试使用，能够满足正常需求；</p>
+<p>目前找到唯一开源的 OMA DM 相关的服务器，作为调试使用，能够满足正常需求；</p>
 </blockquote>
-<p><a href="https://pan.baidu.com/s/1GM3ZHvp62pYwAkiJYz0Gyg?pwd=tg1a">点我下载funambol-packages.zip</a></p>
+<p><a href="https://pan.baidu.com/s/1GM3ZHvp62pYwAkiJYz0Gyg?pwd=tg1a">点我下载 funambol-packages.zip</a></p>
 <p>部署环境：<br>
 JDK:1.8<br>
 MySQL:5.7.17<br>
 Jboss:3.2.6</p>
 <p>部署步骤：</p>
 <ol>
-<li>将部署环境都安装好；MySQL和Jboss需要通过JDBC联通；配置好JBOSS_HOME，J2EE_HOME环境变量；运行Jboss，可访问http://localhost:8080/ （Jboss环境配好后，关闭Jboss，以免影响后面操作）</li>
-<li>创建funambol数据库</li>
+<li>将部署环境都安装好；MySQL 和 Jboss 需要通过 JDBC 联通；配置好 JBOSS_HOME，J2EE_HOME环境变量；运行 Jboss，可访问 http://localhost:8080/ （ Jboss 环境配好后，关闭 Jboss，以免影响后面操作）</li>
+<li>创建 funambol 数据库</li>
 </ol>
 <pre><code>mysql &gt; create database funambol_db;
 mysql &gt; grant all on funambol_db.* to 'funambol'@'localhost' identified by 'funambol';
 </code></pre>
 <ol start="3">
-<li>funambol服务配置</li>
+<li>funambol 服务配置</li>
 </ol>
 <pre><code>Funambol/install.properties配置
 
@@ -157,8 +157,8 @@ engine.modelname=DM Server
 
 </code></pre>
 <ol start="4">
-<li>执行Funambol源码下的<code>&quot;.\Funambol\bin\install.cmd&quot;</code>,生成数据库信息</li>
-<li>开启Jboss，执行Funambol源码下的<code>&quot;.\Funambol\bin\start.cmd&quot;</code>,启动服务，访问http://127.0.0.1:8080/dmdemo/</li>
+<li>执行 Funambol 源码下的 <code>&quot;.\Funambol\bin\install.cmd&quot;</code>,生成数据库信息</li>
+<li>开启 Jboss，执行 Funambol 源码下的 <code>&quot;.\Funambol\bin\start.cmd&quot;</code>,启动服务，访问http://127.0.0.1:8080/dmdemo/</li>
 </ol>
 <h3 id="scts_dm_112">SCTS_DM_1.1.2</h3>
 <blockquote>
@@ -169,7 +169,7 @@ engine.modelname=DM Server
 <img src="https://raiseyang.github.io/post-images/1642405871811.png" alt="" loading="lazy"><br>
 <img src="https://raiseyang.github.io/post-images/1642405930057.png" alt="" loading="lazy"></p>
 <blockquote>
-<p>注意客户端认证：用户名和密码都填写funambol</p>
+<p>注意客户端认证：用户名和密码都填写 funambol</p>
 </blockquote>
 <figure data-type="image" tabindex="1"><img src="https://raiseyang.github.io/post-images/1642405935360.png" alt="" loading="lazy"></figure>
 
@@ -177,6 +177,14 @@ engine.modelname=DM Server
         </div>
 
         
+          <div class="next-post">
+            <a class="purple-link" href="https://raiseyang.github.io/post/zhong-wen-wen-an-pai-ban-zhi-bei/">
+              <h3 class="post-title">
+                下一篇：中文文案排版指北
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
       

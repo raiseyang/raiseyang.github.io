@@ -1,133 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://raiseyang.github.io</id>
-    <title>指南针在摇摆</title>
-    <updated>2022-01-19T11:56:34.816Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://raiseyang.github.io"/>
-    <link rel="self" href="https://raiseyang.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>https://raiseyang.github.io/images/avatar.png</logo>
-    <icon>https://raiseyang.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2022, 指南针在摇摆</rights>
-    <entry>
-        <title type="html"><![CDATA[OMA DM Bootstrap]]></title>
-        <id>https://raiseyang.github.io/post/oma-dm-bootstrap/</id>
-        <link href="https://raiseyang.github.io/post/oma-dm-bootstrap/">
-        </link>
-        <updated>2022-01-18T05:52:53.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="概念">概念</h2>
-<p>Bootstrap，中文翻译为引导程序，就是我们一个成熟的Client程序开发好了，也烧在Android手机上了，但是缺少运行的<strong>必要信息</strong>(profile)，所以这个Client是不能运行的。<br>
-需要将这些<strong>必要信息</strong> <strong>导入</strong>到Android手机上，Client才能正常运行；<br>
-上面提到的必要信息包括：DM服务器信息(url，认证信息)等；<br>
-<strong>导入</strong>分为3种导入方式：1，客制化引导(工厂引导)；2，服务器引导；3，智能卡引导</p>
-<h2 id="oma-cpdm">OMA CP/DM</h2>
-<p>OMA CP和OMA DM是两种可选的<strong>必要信息</strong>；<br>
-OMA CP用于使用OMA配置一些邮箱，WIFI等信息；<br>
-OMA DM用于使用OMADM做一些设备管理；</p>
-<h2 id="使用场景">使用场景</h2>
-<p>Bootstrap的目的想让Client有连接多个服务器的能力，比如在开发初期，在国内测试时，一般都需要配置自己的DM服务器地址，在中途做IOT测试时，需要访问IOT DM服务器，在项目后期，又要切换到需求方的服务器；<br>
-可能起初制定方案的时候，想的很多，但现在大家实现的Client基本都是工厂引导，将几个服务器地址都提前配置到Client中，通过一些特殊操作来切换；</p>
-<h2 id="现状">现状</h2>
-<p>根据目前需求方的情况，只需要<strong>工厂引导</strong>即可；<br>
-也就是提前做好DM Tree文件配置，然后将DM Tree文件放在APK里；<br>
-关于DMACC节点，一般都是提前写在DM Tree中；</p>
-<p>OMA CP也没有需求方需要，可以不用看；</p>
-<h2 id="参考">参考</h2>
-<p>1.<a href="/OMA-TS-DM_Bootstrap-V1_2_1-20080617-A.pdf">OMA-TS-DM_Bootstrap-V1_2_1-20080617-A.pdf</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[OMA DM 资源汇总]]></title>
-        <id>https://raiseyang.github.io/post/oma-dm-zi-yuan-hui-zong/</id>
-        <link href="https://raiseyang.github.io/post/oma-dm-zi-yuan-hui-zong/">
-        </link>
-        <updated>2022-01-17T06:58:42.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="官方资料">官方资料</h2>
-<p><a href="https://technical.openmobilealliance.org/index.html">OMA Specifications（技术文档官网）</a></p>
-<blockquote>
-<p>里面包含所有 OMA 定义的标准文档列表；可根据自己感兴趣的资料点进去进行下载。</p>
-</blockquote>
-<p>下面列出一些常用的标准文档下载地址：</p>
-<blockquote>
-<p>注意：*-A 结尾的版本代表正式版，直接下载 -A 结尾的就行了；</p>
-</blockquote>
-<p><a href="https://www.openmobilealliance.org/release/Common/">OMA SyncML Common Specification</a></p>
-<blockquote>
-<p>SyncML 协议相关文档</p>
-</blockquote>
-<p><a href="https://www.openmobilealliance.org/release/DM">OMA Device Management (DM)</a></p>
-<blockquote>
-<p>DM 协议相关文档</p>
-</blockquote>
-<p><a href="https://www.openmobilealliance.org/release/FUMO/">OMA Firmware Update Management Object</a></p>
-<blockquote>
-<p>OTA 升级相关文档</p>
-</blockquote>
-<h2 id="开源资料">开源资料</h2>
-<h3 id="funambol-服务器">Funambol 服务器</h3>
-<blockquote>
-<p>目前找到唯一开源的 OMA DM 相关的服务器，作为调试使用，能够满足正常需求；</p>
-</blockquote>
-<p><a href="https://pan.baidu.com/s/1GM3ZHvp62pYwAkiJYz0Gyg?pwd=tg1a">点我下载 funambol-packages.zip</a></p>
-<p>部署环境：<br>
-JDK:1.8<br>
-MySQL:5.7.17<br>
-Jboss:3.2.6</p>
-<p>部署步骤：</p>
-<ol>
-<li>将部署环境都安装好；MySQL 和 Jboss 需要通过 JDBC 联通；配置好 JBOSS_HOME，J2EE_HOME环境变量；运行 Jboss，可访问 http://localhost:8080/ （ Jboss 环境配好后，关闭 Jboss，以免影响后面操作）</li>
-<li>创建 funambol 数据库</li>
-</ol>
-<pre><code>mysql &gt; create database funambol_db;
-mysql &gt; grant all on funambol_db.* to 'funambol'@'localhost' identified by 'funambol';
-</code></pre>
-<ol start="3">
-<li>funambol 服务配置</li>
-</ol>
-<pre><code>Funambol/install.properties配置
 
-server-name=http://127.0.0.1:8080/funambol/dm
-dbms=mysql
-jdbc.classpath=D:/jboss-3.2.6/MySQLJDBC/mysql-connector-java-5.1.7-bin.jar
-jdbc.driver=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://127.0.0.1/funambol_db?zeroDateTimeBehavior=round
-jdbc.user=funambol
-jdbc.password=funambol
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
 
-Funambol/default/config/common/properties/Funambol.properties配置
+<title>中文文案排版指北 | 指南针在摇摆</title>
+<meta name="description" content="温故而知新">
 
-server.uri=http://127.0.0.1:8080/funambol/dm
-syncml.dtdversion=1.2
-engine.manifacturer=Funambol
-engine.modelname=DM Server
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
-</code></pre>
-<ol start="4">
-<li>执行 Funambol 源码下的 <code>&quot;.\Funambol\bin\install.cmd&quot;</code>,生成数据库信息</li>
-<li>开启 Jboss，执行 Funambol 源码下的 <code>&quot;.\Funambol\bin\start.cmd&quot;</code>,启动服务，访问http://127.0.0.1:8080/dmdemo/</li>
-</ol>
-<h3 id="scts_dm_112">SCTS_DM_1.1.2</h3>
-<blockquote>
-<p>目前找到唯一可用的测试客户端，可以用来调试服务器协议支持情况；</p>
-</blockquote>
-<p>下载地址 https://sourceforge.net/projects/oma-scts/</p>
-<p>使用步骤：<br>
-<img src="https://raiseyang.github.io/post-images/1642405871811.png" alt="" loading="lazy"><br>
-<img src="https://raiseyang.github.io/post-images/1642405930057.png" alt="" loading="lazy"></p>
-<blockquote>
-<p>注意客户端认证：用户名和密码都填写 funambol</p>
-</blockquote>
-<figure data-type="image" tabindex="1"><img src="https://raiseyang.github.io/post-images/1642405935360.png" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中文文案排版指北]]></title>
-        <id>https://raiseyang.github.io/post/zhong-wen-wen-an-pai-ban-zhi-bei/</id>
-        <link href="https://raiseyang.github.io/post/zhong-wen-wen-an-pai-ban-zhi-bei/">
-        </link>
-        <updated>1970-01-01T01:34:59.000Z</updated>
-        <content type="html"><![CDATA[<p>平时写 Blog 时，对于某些文字排版还是一窍不通，或者说没有自己的规范，不同的文章排版也不太一样，特参考该篇文章，将其放在博客中时刻提醒和参考。希望自己能够严格按照该要求，写出较好排版的 Blog。</p>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1642593392433">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://raiseyang.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://raiseyang.github.io">
+        <img class="avatar" src="https://raiseyang.github.io/images/avatar.png?v=1642593392433" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://raiseyang.github.io">
+        <h1 class="site-title">指南针在摇摆</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">中文文案排版指北</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 1970-01-01</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://raiseyang.github.io/tag/eWSzHBN-b/">
+                    其他
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>平时写 Blog 时，对于某些文字排版还是一窍不通，或者说没有自己的规范，不同的文章排版也不太一样，特参考该篇文章，将其放在博客中时刻提醒和参考。希望自己能够严格按照该要求，写出较好排版的 Blog。</p>
 <blockquote>
 <p>以下内容引用原文<a href="https://github.com/mzlogin/chinese-copywriting-guidelines">GITHUB</a></p>
 </blockquote>
@@ -539,6 +508,50 @@ engine.modelname=DM Server
 <li><a href="http://zh.wikipedia.org/wiki/%E5%BC%95%E8%99%9F">引号 - 维基百科</a></li>
 <li><a href="http://zh.wikipedia.org/wiki/%E7%96%91%E5%95%8F%E9%A9%9A%E5%98%86%E8%99%9F">疑问惊叹号 - 维基百科</a></li>
 </ul>
-]]></content>
-    </entry>
-</feed>
+
+          </div>
+        </div>
+
+        
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://raiseyang.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
