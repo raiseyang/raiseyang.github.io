@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://raiseyang.github.io</id>
     <title>指南针在摇摆</title>
-    <updated>2022-01-19T11:58:23.645Z</updated>
+    <updated>2022-01-20T02:53:41.503Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://raiseyang.github.io"/>
     <link rel="self" href="https://raiseyang.github.io/atom.xml"/>
@@ -11,30 +11,104 @@
     <icon>https://raiseyang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 指南针在摇摆</rights>
     <entry>
-        <title type="html"><![CDATA[OMA DM Bootstrap]]></title>
-        <id>https://raiseyang.github.io/post/oma-dm-bootstrap/</id>
-        <link href="https://raiseyang.github.io/post/oma-dm-bootstrap/">
+        <title type="html"><![CDATA[自己的油猴脚本]]></title>
+        <id>https://raiseyang.github.io/post/zi-ji-de-you-hou-jiao-ben/</id>
+        <link href="https://raiseyang.github.io/post/zi-ji-de-you-hou-jiao-ben/">
         </link>
-        <updated>2022-01-18T05:52:53.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="概念">概念</h2>
-<p>Bootstrap，中文翻译为引导程序，就是我们一个成熟的Client程序开发好了，也烧在Android手机上了，但是缺少运行的<strong>必要信息</strong>(profile)，所以这个Client是不能运行的。<br>
-需要将这些<strong>必要信息</strong> <strong>导入</strong>到Android手机上，Client才能正常运行；<br>
-上面提到的必要信息包括：DM服务器信息(url，认证信息)等；<br>
-<strong>导入</strong>分为3种导入方式：1，客制化引导(工厂引导)；2，服务器引导；3，智能卡引导</p>
-<h2 id="oma-cpdm">OMA CP/DM</h2>
-<p>OMA CP和OMA DM是两种可选的<strong>必要信息</strong>；<br>
-OMA CP用于使用OMA配置一些邮箱，WIFI等信息；<br>
-OMA DM用于使用OMADM做一些设备管理；</p>
-<h2 id="使用场景">使用场景</h2>
-<p>Bootstrap的目的想让Client有连接多个服务器的能力，比如在开发初期，在国内测试时，一般都需要配置自己的DM服务器地址，在中途做IOT测试时，需要访问IOT DM服务器，在项目后期，又要切换到需求方的服务器；<br>
-可能起初制定方案的时候，想的很多，但现在大家实现的Client基本都是工厂引导，将几个服务器地址都提前配置到Client中，通过一些特殊操作来切换；</p>
-<h2 id="现状">现状</h2>
-<p>根据目前需求方的情况，只需要<strong>工厂引导</strong>即可；<br>
-也就是提前做好DM Tree文件配置，然后将DM Tree文件放在APK里；<br>
-关于DMACC节点，一般都是提前写在DM Tree中；</p>
-<p>OMA CP也没有需求方需要，可以不用看；</p>
-<h2 id="参考">参考</h2>
-<p>1.<a href="/OMA-TS-DM_Bootstrap-V1_2_1-20080617-A.pdf">OMA-TS-DM_Bootstrap-V1_2_1-20080617-A.pdf</a></p>
+        <updated>2022-01-19T09:02:53.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="将连接拷贝成-markdown-格式">将连接拷贝成 Markdown 格式</h2>
+<h3 id="起因">起因：</h3>
+<p>每次写 Blog 时，需要参考互联网上的文章，参考完成之后，希望能够把连接拷贝到文章里，这样一方面方便自己以后仔细的对照，一方面也尊重作者的成果；<br>
+在每次拷贝文章的时候，我都是去浏览器地址栏拷贝；很方便，鼠标点击一下地址栏(或者快捷键 <code>Ctrl + L</code>)，<code>Ctrl + C</code>就成了；<br>
+但是这样的纯链接贴到.md文件中，还是一个链接，并没有按照.md格式<code>[百度一下](https://www.baidu.com)</code>，而且不方便阅读；<br>
+更优秀的方式，是拷贝之后，直接贴过来，就已经包含了.md 格式；<br>
+比如要参考该篇 Blog<br>
+<img src="https://raiseyang.github.io/post-images/1642583702475.jpg" alt="" loading="lazy"><br>
+如果直接拷贝链接<br>
+https://blog.csdn.net/u011054333/article/details/104101806</p>
+<p>拷贝成.md格式的链接<br>
+<a href="https://blog.csdn.net/u011054333/article/details/104101806">油猴脚本编写教程</a><br>
+可读性大大增加；<br>
+而且还有一个好处是，如果后面某些原因这篇文章链接打不开了，我们还可以百度文章标题，基本上会出现一大波<strong>抄袭</strong>文章；</p>
+<h3 id="需求">需求：</h3>
+<p>很明确，希望在界面是显示一个按钮，点击一下会将文章标题和链接拷贝成 .md 的格式；</p>
+<h3 id="分析">分析</h3>
+<p>该功能可以通过浏览器扩展，油猴脚本来实现；很明显油猴脚本对这种小需求更适合；所以我采用油猴脚本实现；<br>
+首先需要找到文章标题，文章链接，通过查看网页源码查找<br>
+<img src="https://raiseyang.github.io/post-images/1642584371647.png" alt="" loading="lazy"><br>
+<s>使用JQuery 找到这两个元素；</s><br>
+文章链接通过 window.location.href 得到；<br>
+文章标题通过 $(&quot;#articleContentId&quot;).text(); 得到；</p>
+<p>在页面上添加一个按钮，并绑定点击事件；<br>
+可参考 https://blog.csdn.net/u010598445/article/details/108880602</p>
+<p>文本复制到剪切板<br>
+https://www.tampermonkey.net/documentation.php#GM_setClipboard</p>
+<h3 id="实现">实现</h3>
+<p>稍微改动一下，做成悬浮的，左上角显示；方便点击；</p>
+<pre><code>// ==UserScript==
+// @name         复制成 Markdown 的 Link
+// @namespace    https://raiseyang.github.io/
+// @version      0.1
+// @description  将当前网站链接拷贝成 Markdown 格式
+// @author       RaiseYang
+// @include        *
+// @match        https://blog.csdn.net/**
+// @icon         https://raiseyang.github.io/raiseyang/markdown_copy.png
+// @grant        GM_setClipboard
+// @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
+// @license        MIT
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Your code here...
+    var $ = window.$;
+
+    console.log('复制成 Markdown 的 Link 脚本加载了');
+    var button = document.createElement(&quot;button&quot;); //创建一个input对象（提示框按钮）
+    button.id = &quot;id001&quot;;
+    button.textContent = &quot;Markdown Link&quot;;
+    button.style.background=&quot;red&quot;;
+    button.style.width = &quot;100px&quot;;
+    button.style.height = &quot;40px&quot;;
+    button.style.position = &quot;fixed&quot;;
+    button.style.bottom = &quot;100px&quot;;
+    button.style.right = &quot;20px&quot;;
+
+    //绑定按键点击功能
+    button.onclick = function (){
+        console.log('点击了按键');
+
+        // 当前网站链接
+        var link = window.location.href
+
+        let title;
+
+        let CSDNegexp= /.*csdn\.net\/.+/; // 匹配CSDN
+        if(CSDNegexp.test(link)){
+            console.log(&quot;CSDNegexp&quot;)
+
+            title = $(&quot;#articleContentId&quot;).text(); // CSDN的title定制化
+        }else {
+            console.log(&quot;other site&quot;)
+            title = $(document).attr('title');
+        }
+
+        //alert(&quot;[&quot;+title+&quot;](&quot;+link+&quot;)&quot;);
+        let markdownLink = &quot;[&quot;+title+&quot;](&quot;+link+&quot;)&quot;; // 拼接成Markdown格式
+        GM_setClipboard(markdownLink, &quot;text&quot;); // 复制到剪切板
+        console.log('GM_setClipboard='+markdownLink); // 控制台打印，便于调试
+        return;
+    };
+
+    $(&quot;body&quot;).append(button); // 添加button按钮
+
+})();
+</code></pre>
+<p>参考：<br>
+<a href="https://blog.csdn.net/feiying0canglang/article/details/114235964">油猴--基础</a><br>
+<a href="https://www.tampermonkey.net/documentation.php?ext=dhdg">Tampermonkey • 文档</a></p>
 ]]></content>
     </entry>
     <entry>

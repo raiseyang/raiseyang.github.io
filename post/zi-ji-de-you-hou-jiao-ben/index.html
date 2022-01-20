@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>自己的油猴脚本 | 指南针在摇摆</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1642594871510">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://raiseyang.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://raiseyang.github.io">
+        <img class="avatar" src="https://raiseyang.github.io/images/avatar.png?v=1642594871510" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://raiseyang.github.io">
+        <h1 class="site-title">指南针在摇摆</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">自己的油猴脚本</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2022-01-19</span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="将连接拷贝成-markdown-格式">将连接拷贝成 Markdown 格式</h2>
+<h3 id="起因">起因：</h3>
+<p>每次写 Blog 时，需要参考互联网上的文章，参考完成之后，希望能够把连接拷贝到文章里，这样一方面方便自己以后仔细的对照，一方面也尊重作者的成果；<br>
+在每次拷贝文章的时候，我都是去浏览器地址栏拷贝；很方便，鼠标点击一下地址栏(或者快捷键 <code>Ctrl + L</code>)，<code>Ctrl + C</code>就成了；<br>
+但是这样的纯链接贴到.md文件中，还是一个链接，并没有按照.md格式<code>[百度一下](https://www.baidu.com)</code>，而且不方便阅读；<br>
+更优秀的方式，是拷贝之后，直接贴过来，就已经包含了.md 格式；<br>
+比如要参考该篇 Blog<br>
+<img src="https://raiseyang.github.io/post-images/1642583702475.jpg" alt="" loading="lazy"><br>
+如果直接拷贝链接<br>
+https://blog.csdn.net/u011054333/article/details/104101806</p>
+<p>拷贝成.md格式的链接<br>
+<a href="https://blog.csdn.net/u011054333/article/details/104101806">油猴脚本编写教程</a><br>
+可读性大大增加；<br>
+而且还有一个好处是，如果后面某些原因这篇文章链接打不开了，我们还可以百度文章标题，基本上会出现一大波<strong>抄袭</strong>文章；</p>
+<h3 id="需求">需求：</h3>
+<p>很明确，希望在界面是显示一个按钮，点击一下会将文章标题和链接拷贝成 .md 的格式；</p>
+<h3 id="分析">分析</h3>
+<p>该功能可以通过浏览器扩展，油猴脚本来实现；很明显油猴脚本对这种小需求更适合；所以我采用油猴脚本实现；<br>
+首先需要找到文章标题，文章链接，通过查看网页源码查找<br>
+<img src="https://raiseyang.github.io/post-images/1642584371647.png" alt="" loading="lazy"><br>
+<s>使用JQuery 找到这两个元素；</s><br>
+文章链接通过 window.location.href 得到；<br>
+文章标题通过 $(&quot;#articleContentId&quot;).text(); 得到；</p>
+<p>在页面上添加一个按钮，并绑定点击事件；<br>
+可参考 https://blog.csdn.net/u010598445/article/details/108880602</p>
+<p>文本复制到剪切板<br>
+https://www.tampermonkey.net/documentation.php#GM_setClipboard</p>
+<h3 id="实现">实现</h3>
+<p>稍微改动一下，做成悬浮的，左上角显示；方便点击；</p>
+<pre><code>// ==UserScript==
+// @name         复制成 Markdown 的 Link
+// @namespace    https://raiseyang.github.io/
+// @version      0.1
+// @description  将当前网站链接拷贝成 Markdown 格式
+// @author       RaiseYang
+// @include        *
+// @match        https://blog.csdn.net/**
+// @icon         https://raiseyang.github.io/raiseyang/markdown_copy.png
+// @grant        GM_setClipboard
+// @require     https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js
+// @license        MIT
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Your code here...
+    var $ = window.$;
+
+    console.log('复制成 Markdown 的 Link 脚本加载了');
+    var button = document.createElement(&quot;button&quot;); //创建一个input对象（提示框按钮）
+    button.id = &quot;id001&quot;;
+    button.textContent = &quot;Markdown Link&quot;;
+    button.style.background=&quot;red&quot;;
+    button.style.width = &quot;100px&quot;;
+    button.style.height = &quot;40px&quot;;
+    button.style.position = &quot;fixed&quot;;
+    button.style.bottom = &quot;100px&quot;;
+    button.style.right = &quot;20px&quot;;
+
+    //绑定按键点击功能
+    button.onclick = function (){
+        console.log('点击了按键');
+
+        // 当前网站链接
+        var link = window.location.href
+
+        let title;
+
+        let CSDNegexp= /.*csdn\.net\/.+/; // 匹配CSDN
+        if(CSDNegexp.test(link)){
+            console.log(&quot;CSDNegexp&quot;)
+
+            title = $(&quot;#articleContentId&quot;).text(); // CSDN的title定制化
+        }else {
+            console.log(&quot;other site&quot;)
+            title = $(document).attr('title');
+        }
+
+        //alert(&quot;[&quot;+title+&quot;](&quot;+link+&quot;)&quot;);
+        let markdownLink = &quot;[&quot;+title+&quot;](&quot;+link+&quot;)&quot;; // 拼接成Markdown格式
+        GM_setClipboard(markdownLink, &quot;text&quot;); // 复制到剪切板
+        console.log('GM_setClipboard='+markdownLink); // 控制台打印，便于调试
+        return;
+    };
+
+    $(&quot;body&quot;).append(button); // 添加button按钮
+
+})();
+</code></pre>
+<p>参考：<br>
+<a href="https://blog.csdn.net/feiying0canglang/article/details/114235964">油猴--基础</a><br>
+<a href="https://www.tampermonkey.net/documentation.php?ext=dhdg">Tampermonkey • 文档</a></p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://raiseyang.github.io/post/oma-dm-zi-yuan-hui-zong/">
+              <h3 class="post-title">
+                下一篇：OMA DM 资源汇总
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://raiseyang.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
