@@ -5,14 +5,14 @@
     
 <meta charset="utf-8" >
 
-<title>自己的油猴脚本 | 指南针在摇摆</title>
+<title>油猴脚本 将网站拷贝成 Markdown 格式的链接 | 指南针在摇摆</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1642594871510">
+<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1642744631155">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://raiseyang.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://raiseyang.github.io">
-        <img class="avatar" src="https://raiseyang.github.io/images/avatar.png?v=1642594871510" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://raiseyang.github.io/images/avatar.png?v=1642744631155" alt="" width="32px" height="32px">
       </a>
       <a href="https://raiseyang.github.io">
         <h1 class="site-title">指南针在摇摆</h1>
@@ -80,33 +80,33 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">自己的油猴脚本</h2>
+          <h2 class="post-title">油猴脚本 将网站拷贝成 Markdown 格式的链接</h2>
           <div class="post-info post-detail-info">
             <span><i class="icon-calendar-outline"></i> 2022-01-19</span>
             
           </div>
           <div class="post-content">
-            <h2 id="将连接拷贝成-markdown-格式">将连接拷贝成 Markdown 格式</h2>
+            <h2 id="将网站拷贝成-markdown-格式的链接">将网站拷贝成 Markdown 格式的链接</h2>
 <h3 id="起因">起因：</h3>
-<p>每次写 Blog 时，需要参考互联网上的文章，参考完成之后，希望能够把连接拷贝到文章里，这样一方面方便自己以后仔细的对照，一方面也尊重作者的成果；<br>
+<p>每次写 Blog 时，需要参考互联网上的文章，参考完成之后，希望能够把链接拷贝到文章里，这样一方面方便自己以后仔细的对照，一方面也尊重作者的成果；<br>
 在每次拷贝文章的时候，我都是去浏览器地址栏拷贝；很方便，鼠标点击一下地址栏(或者快捷键 <code>Ctrl + L</code>)，<code>Ctrl + C</code>就成了；<br>
-但是这样的纯链接贴到.md文件中，还是一个链接，并没有按照.md格式<code>[百度一下](https://www.baidu.com)</code>，而且不方便阅读；<br>
-更优秀的方式，是拷贝之后，直接贴过来，就已经包含了.md 格式；<br>
+但是这样的纯链接贴到 .md 文件中，还是一个链接，并没有按照 .md 格式<code>[百度一下](https://www.baidu.com)</code>，而且不方便阅读；<br>
+更优秀的方式，是拷贝之后，直接贴过来，就已经包含了 .md 格式；<br>
 比如要参考该篇 Blog<br>
 <img src="https://raiseyang.github.io/post-images/1642583702475.jpg" alt="" loading="lazy"><br>
 如果直接拷贝链接<br>
 https://blog.csdn.net/u011054333/article/details/104101806</p>
-<p>拷贝成.md格式的链接<br>
+<p>拷贝成 .md 格式的链接<br>
 <a href="https://blog.csdn.net/u011054333/article/details/104101806">油猴脚本编写教程</a><br>
 可读性大大增加；<br>
-而且还有一个好处是，如果后面某些原因这篇文章链接打不开了，我们还可以百度文章标题，基本上会出现一大波<strong>抄袭</strong>文章；</p>
+而且还有一个好处是，如果后面某些原因这篇文章链接打不开了，我们还可以百度文章标题，基本上会出现一大波&quot;<strong>抄袭</strong>&quot;文章；</p>
 <h3 id="需求">需求：</h3>
 <p>很明确，希望在界面是显示一个按钮，点击一下会将文章标题和链接拷贝成 .md 的格式；</p>
 <h3 id="分析">分析</h3>
 <p>该功能可以通过浏览器扩展，油猴脚本来实现；很明显油猴脚本对这种小需求更适合；所以我采用油猴脚本实现；<br>
 首先需要找到文章标题，文章链接，通过查看网页源码查找<br>
 <img src="https://raiseyang.github.io/post-images/1642584371647.png" alt="" loading="lazy"><br>
-<s>使用JQuery 找到这两个元素；</s><br>
+<s>使用 JQuery 找到这两个元素；</s><br>
 文章链接通过 window.location.href 得到；<br>
 文章标题通过 $(&quot;#articleContentId&quot;).text(); 得到；</p>
 <p>在页面上添加一个按钮，并绑定点击事件；<br>
@@ -176,6 +176,9 @@ https://www.tampermonkey.net/documentation.php#GM_setClipboard</p>
 
 })();
 </code></pre>
+<h2 id="放在-greasyfork-上">放在 greasyfork 上</h2>
+<p>在 <a href="https://greasyfork.org/zh-CN">greasyfork</a> 上先注册一个账号，然后可以很方便的上传自己的脚本；<br>
+本文的脚本地址是：<a href="https://greasyfork.org/zh-CN/scripts/438841-%E5%A4%8D%E5%88%B6%E6%88%90-markdown-%E7%9A%84-link">复制成 Markdown 的 Link</a></p>
 <p>参考：<br>
 <a href="https://blog.csdn.net/feiying0canglang/article/details/114235964">油猴--基础</a><br>
 <a href="https://www.tampermonkey.net/documentation.php?ext=dhdg">Tampermonkey • 文档</a></p>
@@ -185,9 +188,9 @@ https://www.tampermonkey.net/documentation.php#GM_setClipboard</p>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://raiseyang.github.io/post/oma-dm-zi-yuan-hui-zong/">
+            <a class="purple-link" href="https://raiseyang.github.io/post/oma-dm-bootstrap/">
               <h3 class="post-title">
-                下一篇：OMA DM 资源汇总
+                下一篇：OMA DM Bootstrap
               </h3>
             </a>
           </div>

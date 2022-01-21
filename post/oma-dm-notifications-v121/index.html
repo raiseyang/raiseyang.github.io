@@ -1,9 +1,11 @@
+
+<!DOCTYPE html>
 <html>
   <head>
     
 <meta charset="utf-8" >
 
-<title>指南针在摇摆</title>
+<title>OMA DM Notifications-V1.2.1 | 指南针在摇摆</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -75,89 +77,48 @@
 </transition>
 
 
-        <div class="content-container">
+      <div class="content-container">
+        <div class="post-detail">
           
-          
+          <h2 class="post-title">OMA DM Notifications-V1.2.1</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2022-01-20</span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="概述">概述</h2>
+<p>Notifications 定义：服务器<strong>推送</strong>一条消息给客户端，客户端接收到这条<strong>消息</strong>，并使用这条消息。<br>
+这里的推送可以使 WAP PUSH, 也可以是 MQTT 等方式；<br>
+消息也是有具体定义的，官方文档重要的讲述了消息的格式；</p>
+<h2 id="消息格式">消息格式</h2>
+<p>先上2张官方文档的格式图：<br>
+<img src="https://raiseyang.github.io/post-images/1642661385945.png" alt="消息格式" loading="lazy"><br>
+<img src="https://raiseyang.github.io/post-images/1642661394683.png" alt="格式说明" loading="lazy"></p>
+<h2 id="实战">实战</h2>
+<p>某服务器下发的通知消息如下：<br>
+<img src="https://raiseyang.github.io/post-images/1642661603869.png" alt="" loading="lazy"></p>
+<p>digest算法<br>
+Digest = H(B64(H(serveridentifier:password)):nonce:B64(H(trigger)))</p>
+<h2 id="参考">参考</h2>
+<p>1。OMA-TS-DM_Notification-V1_2_1-20080617-A.pdf</p>
 
-<div class="archives-container">
-  
-    <h2 class="year">2022</h2>
-    
-      
-        <article class="post">
-          <a href="https://raiseyang.github.io/post/oma-dm-notifications-v121/">
-            <h2 class="post-title">
-              OMA DM Notifications-V1.2.1
-              <small>2022-01-20</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://raiseyang.github.io/post/zi-ji-de-you-hou-jiao-ben/">
-            <h2 class="post-title">
-              油猴脚本 将网站拷贝成 Markdown 格式的链接
-              <small>2022-01-19</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://raiseyang.github.io/post/oma-dm-bootstrap/">
-            <h2 class="post-title">
-              OMA DM Bootstrap
-              <small>2022-01-18</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://raiseyang.github.io/post/oma-dm-zi-yuan-hui-zong/">
-            <h2 class="post-title">
-              OMA DM 资源汇总
-              <small>2022-01-17</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-    
-  
-    <h2 class="year">1970</h2>
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        <article class="post">
-          <a href="https://raiseyang.github.io/post/zhong-wen-wen-an-pai-ban-zhi-bei/">
-            <h2 class="post-title">
-              中文文案排版指北
-              <small>1970-01-01</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-  
-</div>
-
-
+          </div>
         </div>
 
-        <div class="site-footer">
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://raiseyang.github.io/post/zi-ji-de-you-hou-jiao-ben/">
+              <h3 class="post-title">
+                下一篇：油猴脚本 将网站拷贝成 Markdown 格式的链接
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
   <div class="slogan">温故而知新</div>
   <div class="social-container">
     
@@ -176,8 +137,8 @@
 </div>
 
 
-      </div>
-      <script type="application/javascript">
+    </div>
+    <script type="application/javascript">
 
 hljs.initHighlightingOnLoad()
 
@@ -193,6 +154,5 @@ var app = new Vue({
 
 
 
-    </div>
   </body>
 </html>

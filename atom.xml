@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://raiseyang.github.io</id>
     <title>指南针在摇摆</title>
-    <updated>2022-01-20T02:53:41.503Z</updated>
+    <updated>2022-01-21T05:57:16.235Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://raiseyang.github.io"/>
     <link rel="self" href="https://raiseyang.github.io/atom.xml"/>
@@ -11,32 +11,55 @@
     <icon>https://raiseyang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 指南针在摇摆</rights>
     <entry>
-        <title type="html"><![CDATA[自己的油猴脚本]]></title>
+        <title type="html"><![CDATA[OMA DM Notifications-V1.2.1]]></title>
+        <id>https://raiseyang.github.io/post/oma-dm-notifications-v121/</id>
+        <link href="https://raiseyang.github.io/post/oma-dm-notifications-v121/">
+        </link>
+        <updated>2022-01-20T06:44:14.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="概述">概述</h2>
+<p>Notifications 定义：服务器<strong>推送</strong>一条消息给客户端，客户端接收到这条<strong>消息</strong>，并使用这条消息。<br>
+这里的推送可以使 WAP PUSH, 也可以是 MQTT 等方式；<br>
+消息也是有具体定义的，官方文档重要的讲述了消息的格式；</p>
+<h2 id="消息格式">消息格式</h2>
+<p>先上2张官方文档的格式图：<br>
+<img src="https://raiseyang.github.io/post-images/1642661385945.png" alt="消息格式" loading="lazy"><br>
+<img src="https://raiseyang.github.io/post-images/1642661394683.png" alt="格式说明" loading="lazy"></p>
+<h2 id="实战">实战</h2>
+<p>某服务器下发的通知消息如下：<br>
+<img src="https://raiseyang.github.io/post-images/1642661603869.png" alt="" loading="lazy"></p>
+<p>digest算法<br>
+Digest = H(B64(H(serveridentifier:password)):nonce:B64(H(trigger)))</p>
+<h2 id="参考">参考</h2>
+<p>1。OMA-TS-DM_Notification-V1_2_1-20080617-A.pdf</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[油猴脚本 将网站拷贝成 Markdown 格式的链接]]></title>
         <id>https://raiseyang.github.io/post/zi-ji-de-you-hou-jiao-ben/</id>
         <link href="https://raiseyang.github.io/post/zi-ji-de-you-hou-jiao-ben/">
         </link>
         <updated>2022-01-19T09:02:53.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="将连接拷贝成-markdown-格式">将连接拷贝成 Markdown 格式</h2>
+        <content type="html"><![CDATA[<h2 id="将网站拷贝成-markdown-格式的链接">将网站拷贝成 Markdown 格式的链接</h2>
 <h3 id="起因">起因：</h3>
-<p>每次写 Blog 时，需要参考互联网上的文章，参考完成之后，希望能够把连接拷贝到文章里，这样一方面方便自己以后仔细的对照，一方面也尊重作者的成果；<br>
+<p>每次写 Blog 时，需要参考互联网上的文章，参考完成之后，希望能够把链接拷贝到文章里，这样一方面方便自己以后仔细的对照，一方面也尊重作者的成果；<br>
 在每次拷贝文章的时候，我都是去浏览器地址栏拷贝；很方便，鼠标点击一下地址栏(或者快捷键 <code>Ctrl + L</code>)，<code>Ctrl + C</code>就成了；<br>
-但是这样的纯链接贴到.md文件中，还是一个链接，并没有按照.md格式<code>[百度一下](https://www.baidu.com)</code>，而且不方便阅读；<br>
-更优秀的方式，是拷贝之后，直接贴过来，就已经包含了.md 格式；<br>
+但是这样的纯链接贴到 .md 文件中，还是一个链接，并没有按照 .md 格式<code>[百度一下](https://www.baidu.com)</code>，而且不方便阅读；<br>
+更优秀的方式，是拷贝之后，直接贴过来，就已经包含了 .md 格式；<br>
 比如要参考该篇 Blog<br>
 <img src="https://raiseyang.github.io/post-images/1642583702475.jpg" alt="" loading="lazy"><br>
 如果直接拷贝链接<br>
 https://blog.csdn.net/u011054333/article/details/104101806</p>
-<p>拷贝成.md格式的链接<br>
+<p>拷贝成 .md 格式的链接<br>
 <a href="https://blog.csdn.net/u011054333/article/details/104101806">油猴脚本编写教程</a><br>
 可读性大大增加；<br>
-而且还有一个好处是，如果后面某些原因这篇文章链接打不开了，我们还可以百度文章标题，基本上会出现一大波<strong>抄袭</strong>文章；</p>
+而且还有一个好处是，如果后面某些原因这篇文章链接打不开了，我们还可以百度文章标题，基本上会出现一大波&quot;<strong>抄袭</strong>&quot;文章；</p>
 <h3 id="需求">需求：</h3>
 <p>很明确，希望在界面是显示一个按钮，点击一下会将文章标题和链接拷贝成 .md 的格式；</p>
 <h3 id="分析">分析</h3>
 <p>该功能可以通过浏览器扩展，油猴脚本来实现；很明显油猴脚本对这种小需求更适合；所以我采用油猴脚本实现；<br>
 首先需要找到文章标题，文章链接，通过查看网页源码查找<br>
 <img src="https://raiseyang.github.io/post-images/1642584371647.png" alt="" loading="lazy"><br>
-<s>使用JQuery 找到这两个元素；</s><br>
+<s>使用 JQuery 找到这两个元素；</s><br>
 文章链接通过 window.location.href 得到；<br>
 文章标题通过 $(&quot;#articleContentId&quot;).text(); 得到；</p>
 <p>在页面上添加一个按钮，并绑定点击事件；<br>
@@ -106,9 +129,39 @@ https://www.tampermonkey.net/documentation.php#GM_setClipboard</p>
 
 })();
 </code></pre>
+<h2 id="放在-greasyfork-上">放在 greasyfork 上</h2>
+<p>在 <a href="https://greasyfork.org/zh-CN">greasyfork</a> 上先注册一个账号，然后可以很方便的上传自己的脚本；<br>
+本文的脚本地址是：<a href="https://greasyfork.org/zh-CN/scripts/438841-%E5%A4%8D%E5%88%B6%E6%88%90-markdown-%E7%9A%84-link">复制成 Markdown 的 Link</a></p>
 <p>参考：<br>
 <a href="https://blog.csdn.net/feiying0canglang/article/details/114235964">油猴--基础</a><br>
 <a href="https://www.tampermonkey.net/documentation.php?ext=dhdg">Tampermonkey • 文档</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[OMA DM Bootstrap]]></title>
+        <id>https://raiseyang.github.io/post/oma-dm-bootstrap/</id>
+        <link href="https://raiseyang.github.io/post/oma-dm-bootstrap/">
+        </link>
+        <updated>2022-01-18T05:52:53.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="概念">概念</h2>
+<p>Bootstrap ，中文翻译为引导程序，就是我们一个成熟的 Client 程序开发好了，也烧在 Android 手机上了，但是缺少运行的<strong>必要信息</strong> (profile)，所以这个 Client 是不能运行的。<br>
+需要将这些<strong>必要信息</strong> <strong>导入</strong>到 Android 手机上，Client 才能正常运行；<br>
+上面提到的必要信息包括：DM 服务器信息(url，认证信息)等；<br>
+<strong>导入</strong>分为 3 种导入方式：1，客制化引导(工厂引导)；2，服务器引导；3，智能卡引导</p>
+<h2 id="oma-cpdm">OMA CP/DM</h2>
+<p>OMA CP 和OMA DM是两种可选的<strong>必要信息</strong>；<br>
+OMA CP 用于使用 OMA 配置一些邮箱，WIFI 等信息；<br>
+OMA DM 用于使用 OMA DM 做一些设备管理；</p>
+<h2 id="使用场景">使用场景</h2>
+<p>Bootstrap 的目的想让 Client 有连接多个服务器的能力，比如在开发初期，在国内测试时，一般都需要配置自己的 DM 服务器地址，在中途做 IOT 测试时，需要访问 IOT DM 服务器，在项目后期，又要切换到需求方的服务器；<br>
+可能起初制定方案的时候，想的很多，但现在大家实现的 Client 基本都是工厂引导，将几个服务器地址都提前配置到 Client 中，通过一些特殊操作来切换；</p>
+<h2 id="现状">现状</h2>
+<p>根据目前需求方的情况，只需要<strong>工厂引导</strong>即可；<br>
+也就是提前做好 DM Tree 文件配置，然后将 DM Tree 文件放在 APK 里；<br>
+关于 DMACC 节点，一般都是提前写在 DM Tree 中；</p>
+<p>OMA CP 也没有需求方需要，可以不用看；</p>
+<h2 id="参考">参考</h2>
+<p>1.<a href="/static/OMA-TS-DM_Bootstrap-V1_2_1-20080617-A.pdf">OMA-TS-DM_Bootstrap-V1_2_1-20080617-A.pdf</a></p>
 ]]></content>
     </entry>
     <entry>
@@ -178,8 +231,8 @@ engine.modelname=DM Server
 
 </code></pre>
 <ol start="4">
-<li>执行 Funambol 源码下的 <code>&quot;.\Funambol\bin\install.cmd&quot;</code>,生成数据库信息</li>
-<li>开启 Jboss，执行 Funambol 源码下的 <code>&quot;.\Funambol\bin\start.cmd&quot;</code>,启动服务，访问http://127.0.0.1:8080/dmdemo/</li>
+<li>执行 Funambol 源码下的 <code>&quot;.\Funambol\bin\install.cmd&quot;</code>, 生成数据库信息</li>
+<li>开启 Jboss，执行 Funambol 源码下的 <code>&quot;.\Funambol\bin\start.cmd&quot;</code>, 启动服务，访问http://127.0.0.1:8080/dmdemo/</li>
 </ol>
 <h3 id="scts_dm_112">SCTS_DM_1.1.2</h3>
 <blockquote>
