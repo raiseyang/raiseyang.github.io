@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Gradle 环境搭建（一） | 指南针在摇摆</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1643181824601">
+<link rel="stylesheet" href="https://raiseyang.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="环境要求
+JDK 1.7+
+安装
+
+去官方网站下载最新版本,目前最新版本为gradle-4.1-milestone-1,下载地址: https://downloads.gradle.org/distributions/gradle-4.1-..." />
+    <meta name="keywords" content="Gradle" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://raiseyang.github.io">
+        <img src="https://raiseyang.github.io/images/avatar.png?v=1643181824601" class="site-logo">
+        <h1 class="site-title">指南针在摇摆</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://raiseyang.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Gradle 环境搭建（一）</h2>
+            <div class="post-date">2017-10-21</div>
+            
+              <div class="feature-container" style="background-image: url('https://raiseyang.github.io/post-images/gradle-huan-jing-da-jian.jfif')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="环境要求">环境要求</h2>
+<p>JDK 1.7+</p>
+<h2 id="安装">安装</h2>
+<ol>
+<li>去<a href="https://gradle.org/releases/">官方网站</a>下载最新版本,目前最新版本为<code>gradle-4.1-milestone-1</code>,下载地址: https://downloads.gradle.org/distributions/gradle-4.1-milestone-1.</li>
+<li>解压到 <code>D:</code> 目录下.</li>
+<li>配置 <code>GRADLE_HOME</code> 环境变量为:<code>D:\gradle-4.1-milestone-1</code>;并将<code>%GRADLE_HOME%\bin</code>添加到PATH中.</li>
+<li>打开命令行窗口,输入下例命令验证 gradle 配置.</li>
+</ol>
+<pre><code>PS D:\gradle-4.1-milestone-1&gt; gradle -v
+
+------------------------------------------------------------
+Gradle 4.1-milestone-1
+------------------------------------------------------------
+
+Build time:   2017-06-20 17:05:46 UTC
+Revision:     3ad5af92d482b963cc6b00fb5ad53b608606d657
+
+Groovy:       2.4.11
+Ant:          Apache Ant(TM) version 1.9.6 compiled on June 29 2015
+JVM:          1.8.0_112 (Oracle Corporation 25.112-b15)
+OS:           Windows 10 10.0 amd64
+
+PS D:\gradle-4.1-milestone-1&gt;
+</code></pre>
+<ol start="5">
+<li>若出现了上述信息,代表配置成功.</li>
+</ol>
+<h2 id="hello-world">Hello World!</h2>
+<p>新建 build.gradle 文件,并定义一个 task. <code>build.gradle</code> 文件位置: <code>/d/gradle-4.1-milestone-1/gradle-demo/build.gradle</code><br>
+运行 <code>gradle tasks</code> 即可查看该project下的所有任务:</p>
+<pre><code>/d/gradle-4.1-milestone-1/gradle-demo
+$ gradle tasks
+:tasks
+
+------------------------------------------------------------
+All tasks runnable from root project
+------------------------------------------------------------
+
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build.
+wrapper - Generates Gradle wrapper files.
+
+Help tasks
+----------
+buildEnvironment - Displays all buildscript dependencies declared in root project 'gradle-demo'.
+components - Displays the components produced by root project 'gradle-demo'. [incubating]
+dependencies - Displays all dependencies declared in root project 'gradle-demo'.
+dependencyInsight - Displays the insight into a specific dependency in root project 'gradle-demo'.
+dependentComponents - Displays the dependent components of components in root project 'gradle-demo'. [incubating]
+help - Displays a help message.
+model - Displays the configuration model of root project 'gradle-demo'. [incubating]
+projects - Displays the sub-projects of root project 'gradle-demo'.
+properties - Displays the properties of root project 'gradle-demo'.
+tasks - Displays the tasks runnable from root project 'gradle-demo'.
+
+To see all tasks and more detail, run gradle tasks --all
+
+To see more detail about a task, run gradle help --task &lt;task&gt;
+
+BUILD SUCCESSFUL in 0s
+1 actionable task: 1 executed
+</code></pre>
+<p>在build.gradle文件中,新建一个sayHello任务:</p>
+<pre><code>task sayHello {
+	doLast {
+		println 'Hello World!'
+	}
+}
+</code></pre>
+<p>运行sayHello任务,即可打印出Hello World!</p>
+<pre><code>$ gradle sayHello
+Starting a Gradle Daemon (subsequent builds will be faster)
+:sayHello
+Hello World!
+
+BUILD SUCCESSFUL in 3s
+1 actionable task: 1 executed
+
+</code></pre>
+<p><code>:syaHello</code> 为正在执行的任务名称.<br>
+<code>Hello World!</code> 为我们输出的字符串.</p>
+<h2 id="gradle-wapper">Gradle Wapper</h2>
+<p><code>Gradle Wapper</code> 可以使我们在没有安装gralde 的环境下运行 gradle, 而且可以很方便的更换 gradle 的版本.</p>
+<pre><code>$ gradle wrapper
+:wrapper
+
+BUILD SUCCESSFUL in 0s
+1 actionable task: 1 executed
+
+/d/gradle-4.1-milestone-1/gradle-demo
+$ ls
+build.gradle  gradle/  gradlew*  gradlew.bat
+</code></pre>
+<p><code>gradle/</code> 文件夹下为当前项目的配置文件,可以很方便的修改 gradle 的版本<br>
+<code>gradlew</code>, <code>gradlew.bat</code> 为 unix, windows 系统下的脚本文件, 可以直接运行 gradle 脚本.<br>
+比如运行上述 sayHello 任务(注意使用 <code>gradlew</code> ):</p>
+<pre><code>$ ./gradlew sayHello
+Downloading https://services.gradle.org/distributions/gradle-4.1-milestone-1-bin.zip
+</code></pre>
+<blockquote>
+<p>注: 第一次运行, 将会下载 <code>PROJECT_ROOT/gradle/wrapper/gradle-wrapper.properties</code> 文件中配置的 gradle 版本,可能时间会比较长.</p>
+</blockquote>
+<p>以后执行 gradle 指令就可以使用 <code>gradlew task_name</code>, 记得提前进入项目根目录.</p>
+<h2 id="运行一个核心任务core-task">运行一个核心任务(core task)</h2>
+<p>Gradle 内置了很多 type,供创建 task 时使用,比如 <code>Copy</code>, 他的作用是拷贝文件.<br>
+新建文件夹 src, 并在 src 下建立一个文件 hello.txt, 运行下述任务:</p>
+<pre><code>task copy(type: Copy) {
+    from 'src'
+    into 'dest'
+}
+</code></pre>
+<p>将会生成 dest 文件夹,并拷贝 hello.txt 文件至 dest 文件夹下.</p>
+<h2 id="使用-gradle-插件">使用 gradle 插件</h2>
+<p>目前我们项目只有最基础的 gradle 构建能力,并不能构建一个 Java 项目,或者 android 项目.</p>
+<pre><code>$ gradle tasks --all
+:tasks
+
+------------------------------------------------------------
+All tasks runnable from root project
+------------------------------------------------------------
+...
+
+Other tasks
+-----------
+copy
+sayHello
+
+BUILD SUCCESSFUL in 0s
+1 actionable task: 1 executed
+</code></pre>
+<p>只有我们定义的 2 个基础方法, 并且这两个方法对一个具体的项目没有什么作用.<br>
+那么如何构建一个 Java 项目的 gradle 呢, 这就使用的 gradle plugin 的概念. gradle plugin 中定义了众多任务,使得我们构建某个具体的项目变得简单.<br>
+比如 <code>java</code> 插件可以构建 Java 项目</p>
+<pre><code>plugins {
+    id 'java'
+}
+</code></pre>
+<p>我们再来看现在 gradle 有哪些任务:</p>
+<pre><code>$ gradle tasks --all
+:tasks
+
+------------------------------------------------------------
+All tasks runnable from root project
+------------------------------------------------------------
+
+Build tasks
+-----------
+assemble - Assembles the outputs of this project.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.
+buildNeeded - Assembles and tests this project and all projects it depends on.
+classes - Assembles main classes.
+clean - Deletes the build directory.
+jar - Assembles a jar archive containing the main classes.
+testClasses - Assembles test classes.
+
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build.
+wrapper - Generates Gradle wrapper files.
+
+Documentation tasks
+-------------------
+javadoc - Generates Javadoc API documentation for the main source code.
+
+Help tasks
+----------
+...
+
+Verification tasks
+------------------
+check - Runs all checks.
+test - Runs the unit tests.
+
+Other tasks
+-----------
+compileJava - Compiles main Java source.
+compileTestJava - Compiles test Java source.
+copy
+processResources - Processes main resources.
+processTestResources - Processes test resources.
+sayHello
+
+BUILD SUCCESSFUL in 2s
+1 actionable task: 1 executed
+</code></pre>
+<p><code>java</code> 插件内增加了 <code>Build Tasks</code> 任务集,里面的 <code>jar</code> 任务用来打包 jar 包, <code>assemble</code> 任务用来输出所有文件.</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://raiseyang.github.io/tag/4SUpA7r2O/" class="tag">
+                    Gradle
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://raiseyang.github.io/post/zhong-wen-wen-an-pai-ban-zhi-bei/">
+                  <h3 class="post-title">
+                    中文文案排版指北
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

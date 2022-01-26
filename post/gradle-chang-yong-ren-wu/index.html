@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>标签列表 | 指南针在摇摆</title>
+<title>Gradle 常用任务 | 指南针在摇摆</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,7 +18,14 @@
 
 
 
-    <meta name="description" content="温故而知新">
+    <meta name="description" content="gradlew --version
+查看当前 Gradle 版本信息
+
+gradlew tasks
+通常在 Android Studio中，我们可以通过面板，直接运行 Gradle 任务；
+
+但是在某些场景下，我们还是需要自己手动敲击命令行..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div id="app" class="main">
@@ -88,16 +95,47 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <h2 class="tag-list-title">标签列表</h2>
-          <div class="tags-container">
+          <div class="post-detail">
+            <h2 class="post-title">Gradle 常用任务</h2>
+            <div class="post-date">2022-01-21</div>
             
-              <a class="tag" href="https://raiseyang.github.io/tag/DKXRyHlpX/">OMA</a>
+            <div class="post-content" v-pre>
+              <h2 id="gradlew-version">gradlew --version</h2>
+<p>查看当前 Gradle 版本信息<br>
+<img src="https://raiseyang.github.io/post-images/1642750911927.png" alt="" loading="lazy"></p>
+<h2 id="gradlew-tasks">gradlew tasks</h2>
+<p>通常在 Android Studio中，我们可以通过面板，直接运行 Gradle 任务；<br>
+<img src="https://raiseyang.github.io/post-images/1642750611309.png" alt="" loading="lazy"></p>
+<p>但是在某些场景下，我们还是需要自己手动敲击命令行来执行任务；比如上面那个面板异常了，或者是想同时执行多个任务了；<br>
+<code>gradlew tasks</code>可以列出当前所有可执行的 Gradle 任务；解决了我们在命令行敲任务名称时，老是记不住的问题；</p>
+<h2 id="gradlew-appdependencies">gradlew app:dependencies</h2>
+<p>依赖树查询<br>
+所以官方又推出了Scan工具来帮助我们更加方便地查看依赖树<br>
+在项目根目录位置下运行gradle build --scan即可，然后会生成 HTML 格式的分析文件的分析文件<br>
+分析文件会直接上传到Scan官网，命令行最后会给出远程地址<br>
+第一次跑会让你在 Scan 官网注册一下，邮件确认后就能看了<br>
+scan 工具是按照依赖变体挨个分类的，debugCompileClassPath 就是 dedug 打包中的依赖包了</p>
+<hr>
+<h2 id="参考">参考</h2>
+<p><a href="https://juejin.cn/post/6947675376835362846">7个你应该知道的Gradle实用技巧</a></p>
+
+            </div>
             
-              <a class="tag" href="https://raiseyang.github.io/tag/4SUpA7r2O/">Gradle</a>
             
-              <a class="tag" href="https://raiseyang.github.io/tag/eWSzHBN-b/">其他</a>
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://raiseyang.github.io/post/oma-dm-notifications-v121/">
+                  <h3 class="post-title">
+                    OMA DM Notifications-V1.2.1
+                  </h3>
+                </a>
+              </div>
             
+
+            
+
           </div>
+
         </div>
       </div>
     </div>

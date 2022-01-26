@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Gradle Java 项目构建（二） | 指南针在摇摆</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1643181824601">
+<link rel="stylesheet" href="https://raiseyang.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="通过上一章的内容, 我们了解了 gradle 的基本结构, 这一章通过 Java 项目,更深入的了解.
+创建项目文件结构
+创建一个 java-demo 项目
+$ mkdir java-demo
+$ cd java-demo
+
+使用 grad..." />
+    <meta name="keywords" content="Gradle" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://raiseyang.github.io">
+        <img src="https://raiseyang.github.io/images/avatar.png?v=1643181824601" class="site-logo">
+        <h1 class="site-title">指南针在摇摆</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://raiseyang.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Gradle Java 项目构建（二）</h2>
+            <div class="post-date">2017-10-21</div>
+            
+              <div class="feature-container" style="background-image: url('https://raiseyang.github.io/post-images/gradle-java-xiang-mu-gou-jian-er.jfif')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p>通过上一章的内容, 我们了解了 gradle 的基本结构, 这一章通过 Java 项目,更深入的了解.</p>
+<h2 id="创建项目文件结构">创建项目文件结构</h2>
+<p>创建一个 java-demo 项目</p>
+<pre><code>$ mkdir java-demo
+$ cd java-demo
+</code></pre>
+<p>使用 gradle 命令手动创建 Java 目录结构</p>
+<pre><code>$ gradle init --type java-application
+:wrapper
+:init
+
+BUILD SUCCESSFUL in 1s
+2 actionable tasks: 2 executed
+</code></pre>
+<p>构建成功后, 我们看一下目前 java-demo 的目录结构</p>
+<pre><code>│  build.gradle
+│  gradlew
+│  gradlew.bat
+│  settings.gradle
+│
+├─.gradle
+│  ...
+│
+├─gradle
+│  └─wrapper
+│          gradle-wrapper.jar
+│          gradle-wrapper.properties
+│
+└─src
+    ├─main
+    │  └─java
+    │          App.java
+    │
+    └─test
+        └─java
+                AppTest.java
+                
+</code></pre>
+<p><code>build.gradle</code> 为 gradle 脚本文件,每一个 project 都对应一个.<br>
+<code>setting.gradle</code>为 gradle setting 文件,该文件仅作为配置 project 使用. 目前我们就一个 project, 可以暂时不理会.<br>
+<code>src</code> 为 Java 源码目录, <code>main</code> 为主体代码区, <code>test</code> 为测试代码区.</p>
+<h2 id="buildgradle">build.gradle</h2>
+<ul>
+<li>build.gradle</li>
+</ul>
+<pre><code>// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// Apply the application plugin to add support for building an application
+apply plugin: 'application'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+    // This dependency is found on compile classpath of this component and consumers.
+    compile 'com.google.guava:guava:21.0'
+
+    // Use JUnit test framework
+    testCompile 'junit:junit:4.12'
+}
+
+// Define the main class for the application
+mainClassName = 'App'
+</code></pre>
+<p><code>repositories</code> 配置一个仓库,所有的依赖都会去该仓库下载.<br>
+<code>dependencies</code> 配置该项目需要使用到的jar包<br>
+<code>mainClassName</code>, <code>main</code> 方法所在的入口类.<br>
+其他文件大家也可以看一下,不过因为增加了 <code>java</code>, <code>application</code> 插件,我们先一下现在有哪些任务可以执行:</p>
+<pre><code>$ gradle tasks
+:tasks
+
+------------------------------------------------------------
+All tasks runnable from root project
+------------------------------------------------------------
+
+Application tasks
+-----------------
+run - Runs this project as a JVM application
+
+Build tasks
+-----------
+assemble - Assembles the outputs of this project.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.
+buildNeeded - Assembles and tests this project and all projects it depends on.
+classes - Assembles main classes.
+clean - Deletes the build directory.
+jar - Assembles a jar archive containing the main classes.
+testClasses - Assembles test classes.
+
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build.
+wrapper - Generates Gradle wrapper files.
+
+Distribution tasks
+------------------
+assembleDist - Assembles the main distributions
+distTar - Bundles the project as a distribution.
+distZip - Bundles the project as a distribution.
+installDist - Installs the project as a distribution as-is.
+
+Documentation tasks
+-------------------
+javadoc - Generates Javadoc API documentation for the main source code.
+
+
+Verification tasks
+------------------
+check - Runs all checks.
+test - Runs the unit tests.
+
+BUILD SUCCESSFUL in 0s
+1 actionable task: 1 executed
+
+</code></pre>
+<h2 id="run">run</h2>
+<p>现有有这么多与 Java 项目相关的任务都可以执行.先执行 <code>run</code> 试试:</p>
+<pre><code>$ gradle run
+:compileJava
+:processResources NO-SOURCE
+:classes
+:run
+Hello world.
+
+BUILD SUCCESSFUL in 3s
+2 actionable tasks: 2 executed
+</code></pre>
+<p>从 gradle 控制台,我们可以发现 gradle 执行了 4 个任务,但我们只运行了一个 <code>run</code> 任务.<br>
+原来 gradle 中的 task 之间可以设置依赖关系, run 依赖 <code>classes</code>, <code>classes</code> 依赖 <code>processResourse</code> 和 <code>compileJava</code> 任务,所以被依赖的任务必须先完成才行.这和我们编译运行 Java 代码流程一致:先编译,再运行.</p>
+<pre><code class="language-graphLR">    A[:run] --&gt;B(:classes)
+    B --&gt;D[:compileJava]
+    B --&gt;E[:processResources]
+</code></pre>
+<p>想要了解更详细的 task 依赖关系可以参考: <a href="https://github.com/dorongold/gradle-task-tree">gradle-task-tree</a></p>
+<h2 id="build">build</h2>
+<p>使用 <code>build</code> 可以构建整个 Java 项目,将输出很多项目构建时产生的文件.</p>
+<pre><code>$ gradle build
+:compileJava
+:processResources NO-SOURCE
+:classes
+:jar
+:startScripts
+:distTar
+:distZip
+:assemble
+:compileTestJava
+:processTestResources NO-SOURCE
+:testClasses
+:test
+:check
+:build
+
+BUILD SUCCESSFUL in 2s
+7 actionable tasks: 7 executed
+
+</code></pre>
+<p>运行完成之后,将会在项目根目录下生成 <code>build</code> 目录.<br>
+该项目 <code>.jar</code> 文件存放在 <code>build/libs/</code> 目录下.<br>
+可以打开 <code>build\reports\tests\test\index.html</code> 文件查看测试报告.</p>
+<h2 id="打包-jar">打包 .jar</h2>
+<p>当前若只想打包 <code>.jar</code> 文件,只需要执行 <code>gradle jar</code> 即可. 但是这里需要注意打包出来的 jar 包是不能直接运行的, 想要打包可运行的 jar 需要在 build.gradle 中加入:</p>
+<pre><code>jar {
+    manifest {
+        attributes 'Main-Class': 'App'
+    }
+    archiveName &quot;java-demo.jar&quot;
+}
+</code></pre>
+<p>增加清单文件属性 'Main-class', 属性值为类的全包名 <code>com.raise.xxx.Main</code>.<br>
+<code>archiveName</code> 指定jar包的名称.<br>
+若注释有中文, 还需要指定编码:</p>
+<pre><code>tasks.withType(JavaCompile) {
+    options.encoding = &quot;UTF-8&quot;
+}
+</code></pre>
+<p>build 目录不需要我们手动删除,下次构建时会自动删除旧文件.若想清除 build, 可以使用 clean 命令.</p>
+<h2 id="clean">clean</h2>
+<pre><code>$ gradle clean
+:clean
+
+BUILD SUCCESSFUL in 0s
+1 actionable task: 1 executed
+
+</code></pre>
+<p>该命令将会删除当前 project 的 build 目录,若执行该任务失败,也可手动在磁盘上删除 build 目录,不会影响项目构建.</p>
+<hr>
+<p>参考:<br>
+https://guides.gradle.org/building-java-applications/</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://raiseyang.github.io/tag/4SUpA7r2O/" class="tag">
+                    Gradle
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://raiseyang.github.io/post/gradle-huan-jing-da-jian/">
+                  <h3 class="post-title">
+                    Gradle 环境搭建（一）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

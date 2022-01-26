@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>.mk 文件基础 | 指南针在摇摆</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1643181824601">
+<link rel="stylesheet" href="https://raiseyang.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="依赖jar包
+先声明
+LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := moduleName:libs/xxx.jar 
+moduleName2:libs/xxx2.jar 
+再使用
+LOCAL_STATIC_..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://raiseyang.github.io">
+        <img src="https://raiseyang.github.io/images/avatar.png?v=1643181824601" class="site-logo">
+        <h1 class="site-title">指南针在摇摆</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://raiseyang.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">.mk 文件基础</h2>
+            <div class="post-date">2021-03-24</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="依赖jar包">依赖jar包</h2>
+<p>先声明<br>
+LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := moduleName:libs/xxx.jar <br>
+moduleName2:libs/xxx2.jar <br>
+再使用<br>
+LOCAL_STATIC_JAVA_LIBRARIES := moduleName<br>
+moduleName2 \</p>
+<h2 id="如何依赖aar">如何依赖aar</h2>
+<p>先声明<br>
+LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := widget-项目名:路径/widget.aar<br>
+再使用<br>
+LOCAL_STATIC_JAVA_AAR_LIBRARIES := widget-项目名<br>
+给aar添加包名<br>
+LOCAL_AAPT_FLAGS := --auto-add-overlay <br>
+--extra-packages android.support.v7.appcompat \</p>
+<p>aar和jar一样的依赖方式;</p>
+<h2 id="配置assets目录">配置assets目录</h2>
+<p>LOCAL_ASSET_DIR := $(LOCAL_PATH)/app/src/main/assets</p>
+<h2 id="配置resource">配置resource</h2>
+<p>LOCAL_RESOURCE_DIR := <br>
+$(addprefix $(LOCAL_PATH)/../../library/yxp_src/dictenginelib/, res) <br>
+$(LOCAL_PATH)/res</p>
+<h2 id="配置源码">配置源码</h2>
+<p>LOCAL_SRC_FILES := $(call all-java-files-under, src) <br>
+src/com/noahedu/synclearning/engine/IBookService.aidl <br>
+src/com/noahedu/synclearning/engine/IBookServiceCallback.aidl</p>
+<h1 id="call-all-java-files-underextrafunctionsrcmainjava"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi><mi>a</mi><mi>l</mi><mi>l</mi><mo>−</mo><mi>j</mi><mi>a</mi><mi>v</mi><mi>a</mi><mo>−</mo><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi>s</mi><mo>−</mo><mi>u</mi><mi>n</mi><mi>d</mi><mi>e</mi><mi>r</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">(call all-java-files-under,</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mpunct">,</span></span></span></span>(extrafunction)/src/main/java)\</h1>
+<p>#需要引入library/aar的包名<br>
+LOCAL_AAPT_FLAGS := --auto-add-overlay <br>
+--extra-packages com.noahedu.DictEngine <br>
+--extra-packages android.support.v7.appcompat <br>
+--extra-packages android.support.constraint <br>
+--extra-packages android.support.v7.recyclerview \</p>
+<h1 id="是赋值的意思是追加的意思表示连接符">‘:=’是赋值的意思；’+=’是追加的意思；‘\’表示连接符。</h1>
+<p>LOCAL_MODULE_TAGS :=user eng tests optional</p>
+<ul>
+<li>user: 指该模块只在user版本下才编译</li>
+<li>eng: 指该模块只在eng版本下才编译</li>
+<li>tests: 指该模块只在tests版本下才编译</li>
+<li>optional:指该模块在所有版本下都编译</li>
+</ul>
+<p>#指定arm目录<br>
+LOCAL_PREBUILT_JNI_LIBS_arm := libs/armeabi-v7a/libdecrypt.so <br>
+libs/armeabi-v7a/liblasa.so <br>
+libs/armeabi-v7a/libspeex.so \</p>
+<p>#指定androidmainfest.xml目录<br>
+LOCAL_MANIFEST_FILE := app/src/main/AndroidManifest.xml</p>
+<p>#########################################</p>
+<h2 id="以apk方式引用">以apk方式引用</h2>
+<p>#########################################<br>
+LOCAL_PATH := $(my-dir)</p>
+<p>include $(CLEAR_VARS)<br>
+LOCAL_MODULE        := ${moduleName}<br>
+LOCAL_MODULE_TAGS   := optional<br>
+LOCAL_MODULE_CLASS  := APPS<br>
+LOCAL_CERTIFICATE   := platform<br>
+LOCAL_DEX_PREOPT := false<br>
+LOCAL_MODULE_SUFFIX := .apk<br>
+LOCAL_MODULE_PATH   := $(PRODUCT_OUT)/system/app<br>
+LOCAL_SRC_FILES     := $(LOCAL_MODULE).apk<br>
+include $(BUILD_PREBUILT)</p>
+<h2 id="参考">参考</h2>
+<pre><code>1. https://blog.csdn.net/hegan2010/article/details/88710201
+2. https://www.jianshu.com/p/63715928063b
+3. LOCAL_PRIVILEGED_MODULE 详解 https://blog.csdn.net/zhanglianyu00/article/details/75099025
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://raiseyang.github.io/post/zui-xiao-apk-bian-yi-shi-zhan/">
+                  <h3 class="post-title">
+                    最小 APK 编译实战
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

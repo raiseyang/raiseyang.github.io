@@ -1,102 +1,104 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
+    <meta charset="utf-8" >
 
 <title>中文文案排版指北 | 指南针在摇摆</title>
-<meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1642744631155">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://raiseyang.github.io/favicon.ico?v=1643181824601">
 <link rel="stylesheet" href="https://raiseyang.github.io/styles/main.css">
 
 
 
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
 
+    <meta name="description" content="平时写 Blog 时，对于某些文字排版还是一窍不通，或者说没有自己的规范，不同的文章排版也不太一样，特参考该篇文章，将其放在博客中时刻提醒和参考。希望自己能够严格按照该要求，写出较好排版的 Blog。
+
+以下内容引用原文GITHUB
+
+统一..." />
+    <meta name="keywords" content="其他" />
   </head>
   <body>
     <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://raiseyang.github.io">
-        <img class="avatar" src="https://raiseyang.github.io/images/avatar.png?v=1642744631155" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://raiseyang.github.io">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://raiseyang.github.io">
+        <img src="https://raiseyang.github.io/images/avatar.png?v=1643181824601" class="site-logo">
         <h1 class="site-title">指南针在摇摆</h1>
       </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
     </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
+    <div>
       
         
-          <a href="/" class="menu purple-link">
+          <a href="/" class="site-nav">
             首页
           </a>
         
       
         
-          <a href="/archives" class="menu purple-link">
+          <a href="/archives" class="site-nav">
             归档
           </a>
         
       
         
-          <a href="/tags" class="menu purple-link">
+          <a href="/tags" class="site-nav">
             标签
           </a>
         
       
         
-          <a href="/post/about" class="menu purple-link">
+          <a href="/post/about" class="site-nav">
             关于
           </a>
         
       
     </div>
   </div>
-</transition>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://raiseyang.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
 
 
-      <div class="content-container">
-        <div class="post-detail">
-          
-          <h2 class="post-title">中文文案排版指北</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 1970-01-01</span>
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">中文文案排版指北</h2>
+            <div class="post-date">1970-01-01</div>
             
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://raiseyang.github.io/tag/eWSzHBN-b/">
-                    其他
-                    
-                  </a>
-                
-              </span>
-            
-          </div>
-          <div class="post-content">
-            <p>平时写 Blog 时，对于某些文字排版还是一窍不通，或者说没有自己的规范，不同的文章排版也不太一样，特参考该篇文章，将其放在博客中时刻提醒和参考。希望自己能够严格按照该要求，写出较好排版的 Blog。</p>
+            <div class="post-content" v-pre>
+              <p>平时写 Blog 时，对于某些文字排版还是一窍不通，或者说没有自己的规范，不同的文章排版也不太一样，特参考该篇文章，将其放在博客中时刻提醒和参考。希望自己能够严格按照该要求，写出较好排版的 Blog。</p>
 <blockquote>
 <p>以下内容引用原文<a href="https://github.com/mzlogin/chinese-copywriting-guidelines">GITHUB</a></p>
 </blockquote>
@@ -509,37 +511,30 @@
 <li><a href="http://zh.wikipedia.org/wiki/%E7%96%91%E5%95%8F%E9%A9%9A%E5%98%86%E8%99%9F">疑问惊叹号 - 维基百科</a></li>
 </ul>
 
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://raiseyang.github.io/tag/eWSzHBN-b/" class="tag">
+                    其他
+                  </a>
+                
+              </div>
+            
+            
+
+            
+
           </div>
+
         </div>
-
-        
       </div>
-
-      
-
-      <div class="site-footer">
-  <div class="slogan">温故而知新</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://raiseyang.github.io/atom.xml" target="_blank">RSS</a>
-</div>
-
-
     </div>
-    <script type="application/javascript">
 
-hljs.initHighlightingOnLoad()
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
 
 var app = new Vue({
   el: '#app',
@@ -549,6 +544,8 @@ var app = new Vue({
 })
 
 </script>
+
+
 
 
 
