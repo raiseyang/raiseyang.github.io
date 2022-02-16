@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://raiseyang.github.io</id>
     <title>指南针在摇摆</title>
-    <updated>2022-02-15T05:24:54.074Z</updated>
+    <updated>2022-02-16T02:03:53.901Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://raiseyang.github.io"/>
     <link rel="self" href="https://raiseyang.github.io/atom.xml"/>
@@ -10,32 +10,6 @@
     <logo>https://raiseyang.github.io/images/avatar.png</logo>
     <icon>https://raiseyang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 指南针在摇摆</rights>
-    <entry>
-        <title type="html"><![CDATA[Gradle 常用任务]]></title>
-        <id>https://raiseyang.github.io/post/gradle-chang-yong-ren-wu/</id>
-        <link href="https://raiseyang.github.io/post/gradle-chang-yong-ren-wu/">
-        </link>
-        <updated>2022-01-21T07:33:32.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="gradlew-version">gradlew --version</h2>
-<p>查看当前 Gradle 版本信息<br>
-<img src="https://raiseyang.github.io/post-images/1642750911927.png" alt="" loading="lazy"></p>
-<h2 id="gradlew-tasks">gradlew tasks</h2>
-<p>通常在 Android Studio中，我们可以通过面板，直接运行 Gradle 任务；<br>
-<img src="https://raiseyang.github.io/post-images/1642750611309.png" alt="" loading="lazy"></p>
-<p>但是在某些场景下，我们还是需要自己手动敲击命令行来执行任务；比如上面那个面板异常了，或者是想同时执行多个任务了；<br>
-<code>gradlew tasks</code>可以列出当前所有可执行的 Gradle 任务；解决了我们在命令行敲任务名称时，老是记不住的问题；</p>
-<h2 id="gradlew-appdependencies">gradlew app:dependencies</h2>
-<p>依赖树查询<br>
-所以官方又推出了Scan工具来帮助我们更加方便地查看依赖树<br>
-在项目根目录位置下运行gradle build --scan即可，然后会生成 HTML 格式的分析文件的分析文件<br>
-分析文件会直接上传到Scan官网，命令行最后会给出远程地址<br>
-第一次跑会让你在 Scan 官网注册一下，邮件确认后就能看了<br>
-scan 工具是按照依赖变体挨个分类的，debugCompileClassPath 就是 dedug 打包中的依赖包了</p>
-<hr>
-<h2 id="参考">参考</h2>
-<p><a href="https://juejin.cn/post/6947675376835362846">7个你应该知道的Gradle实用技巧</a></p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[OMA DM Notifications-V1.2.1]]></title>
         <id>https://raiseyang.github.io/post/oma-dm-notifications-v121/</id>
@@ -478,650 +452,423 @@ MEAT-INF 文件夹下，主要包含 V1 签名信息，可以考虑去除 V1 签
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Gradle task 详解（三）]]></title>
-        <id>https://raiseyang.github.io/post/gradle-task-xiang-jie-san/</id>
-        <link href="https://raiseyang.github.io/post/gradle-task-xiang-jie-san/">
+        <title type="html"><![CDATA[中文文案排版指北]]></title>
+        <id>https://raiseyang.github.io/post/zhong-wen-wen-an-pai-ban-zhi-bei/</id>
+        <link href="https://raiseyang.github.io/post/zhong-wen-wen-an-pai-ban-zhi-bei/">
         </link>
-        <updated>2017-10-21T09:00:26.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="projecttaskaction">Project&amp;Task&amp;Action</h3>
-<ul>
-<li>一个 Gradle 项目由一个或多个 Project 组成.</li>
-<li>一个 Project 由一个或多个 Task 组成.</li>
-<li>一个 Task 由一个或者多个 Action 组成.</li>
-<li>在一个新建的默认的安卓项目中,默认存在2个 Project: <code>project_name(root)</code>,<code>:app</code></li>
-<li>setting.gradle 文件仅做配置 project 使用</li>
-</ul>
-<h3 id="gradle-执行阶段">Gradle 执行阶段</h3>
-<p>gradle 运行将会分别执行3个阶段: <code>initialization</code>, <code>configuration</code>, <code>execution</code>.</p>
-<ul>
-<li><code>initialization</code> 阶段将会识别所有 project.<br>
-在 <code>configuration</code> 阶段,会将所有的依赖,配置都同步完成,在 <code>execution</code> 阶段将会使用这些依赖,配置来构建具体任务;<br>
-在 <code>configuration</code> 阶段执行完成之后, <code>execution</code> 阶段才会执行;<br>
-比如:</li>
-</ul>
-<pre><code>task testPhase {
-	println 'configuration phase exec 1.'
-	doFirst {
-		println 'execution phase exec a.'
-	}
-	doLast {
-		println 'execution phase exec b.'
-	}
-	println 'configuration phase exec 2.'
-}
-
-</code></pre>
-<p><code>doFirst</code> 和 <code>doLast</code> action块都是在 <code>execution</code> 阶段执行,其余代码将会在<code>configuration</code> 执行,所有应该结果应该是 1,2,a,b;<br>
-实际运行结果如下:</p>
-<pre><code>$ gradle testPhase -q
-configuration phase exec 1.
-configuration phase exec 2.
-execution phase exec a.
-execution phase exec b.
-</code></pre>
-<p>所以在自定义 Task 时,编写的代码需要区分到底是在哪个阶段运行.</p>
-<h3 id="task">Task</h3>
-<p>一个 task 是一个单一的构建任务,一次 build 任务执行时,通常会执行多个 task, 比如:编译生成 classes,生成 javaDoc 文档等等;<br>
-通常我们这样创建 task:</p>
-<pre><code>task myTask
-task myTask { configure closure }
-task myTask(type: SomeType)
-task myTask(type: SomeType) { configure closure }
-</code></pre>
-<p>每个 task 都有一个 name, 上述 task 的 name 为 myTask; 因为 task 和 project 关联,所以每个具体的 task 都有一个全路径,根据所属 project 来指定,使用 <code>:</code> 号分隔;<br>
-下例代码,表示一个 clean task 的的执行过程:</p>
-<pre><code>Executing tasks: [clean]
-:clean
-:app:clean
-:http_libs:clean
-:iot_download_libs:clean
-:iot_libs:clean
-:mqtt_libs:clean
-:trace:clean
-
-BUILD SUCCESSFUL in 1s
-7 actionable tasks: 7 executed
-</code></pre>
-<p>可以发现命名规则为: <code>:project_name:task_name</code><br>
-一个 task 属于某个具体的 project 中,不同的 project 通常会包含同一个 task, 比如 build;</p>
-<h3 id="task-actions">Task Actions</h3>
-<p>一个task由众多 <code>Action</code> 组成,当一个任务执行时,每个 <code>Action</code> 将依次执行;我们也可以自己添加 <code>Action</code>, 最常见的就是 <code>doFirst</code>,<code>doLast</code>;</p>
-<pre><code>task clean {
-    doFirst {
-        println 'custom task:1'
-    }
-}
-</code></pre>
-<h3 id="自定义task">自定义task</h3>
+        <updated>1970-01-01T01:34:59.000Z</updated>
+        <content type="html"><![CDATA[<p>平时写 Blog 时，对于某些文字排版还是一窍不通，或者说没有自己的规范，不同的文章排版也不太一样，特参考该篇文章，将其放在博客中时刻提醒和参考。希望自己能够严格按照该要求，写出较好排版的 Blog。</p>
 <blockquote>
-<p>自定义 task 可以在构建项目过程中，做一些自动化的事情：比如属性配置，拷贝文件，执行某段脚本等；</p>
+<p>以下内容引用原文<a href="https://github.com/mzlogin/chinese-copywriting-guidelines">GITHUB</a></p>
 </blockquote>
-<p>Gradle DSL 支持 task 代码块，API 也包含一些常用的任务：Copy,Wrapper,exec...，你也可以使用这些任务的一些简单属性来做事情；<br>
-比如：<code>Copy</code> 任务包含两个属性：<code>from</code>,<code>into</code>；from 属性可以配置源文件(夹), into 配置目标文件(夹)。</p>
-<pre><code>task copyApks(type: Copy) {
-    from(&quot;$buildDir/outputs/apk&quot;) {
-        exclude '**/*unsigned.apk', '**/*unaligned.apk'
-    }
-    into '../apks'
-}
-</code></pre>
-<p><code>$buildDir</code> 表示获取当前 project 的 build 目录；<br>
-<code>**</code>匹配所有层级目录<br>
-<code>*</code>匹配所有字符<br>
-注:不要急着去执行该任务,因为我们还不知道该任务何时执行;</p>
-<p>如果不想使用 API 包含的任务来配置任务,也可以完全自定义任务;</p>
-<pre><code>task printVariantNames() {
-    println 'configuration time will exec'
-    doLast {
-        android.applicationVariants.all { variant -&gt;
-            println variant.name
-        }
-    }
-}
-</code></pre>
-<p>注意 <code>doLast</code> 代码块内的代码会在 <code>execution</code> 阶段执行,而该代码块之外的代码会在 <code>configuration</code> 阶段执行;</p>
-<p>上述 task 作用是在打印出所有变体名称;<br>
-我们再来看一组示例:</p>
-<pre><code>task installDebugFlavors() {
-    android.applicationVariants.all { v -&gt;
-        if (v.name.endsWith('Debug')) {
-            String name = v.name.capitalize()
-            dependsOn &quot;install$name&quot;
-        }
-    }
-}
-</code></pre>
-<p>该 task 作用是安装所有 Debug 任务到设备中(请提前确保应用包名不一致);<br>
-<code>dependsOn</code> 方法在 <code>configuration</code> 阶段执行,所有当我们执行该 task 时,先是将所有依赖的任务配置好之后,再分别执行他们;</p>
-<pre><code>./gradlew instDebFl
-:app:preBuild UP-TO-DATE
-:app:preArrogantDebugBuild UP-TO-DATE
-:app:checkArrogantDebugManifest
-// ... lots of tasks ...
-:app:assembleArrogantDebug UP-TO-DATE
-:app:installArrogantDebug
-Installing APK 'app-arrogant-debug.apk' on 'Nexus_5_API_23(AVD) - 6.0'
-Installed on 1 device.
-:app:checkFriendlyDebugManifest
-// ... lots of tasks ...
-:app:assembleFriendlyDebug UP-TO-DATE
-:app:installFriendlyDebug
-Installing APK 'app-friendly-debug.apk' on 'Nexus_5_API_23(AVD) - 6.0'
-Installed on 1 device.
-:app:checkObsequiousDebugManifest
-// ... lots of tasks ...
-:app:assembleObsequiousDebug UP-TO-DATE
-:app:installObsequiousDebug
-Installing APK 'app-obsequious-debug.apk' on 'Nexus_5_API_23(AVD) - 6.0'
-Installed on 1 device.
-:app:installDebugFlavors
-BUILD SUCCESSFUL
-</code></pre>
-<h3 id="在-build-阶段运行自定义-task">在 build 阶段运行自定义 task</h3>
-<blockquote>
-<p>使用 dependOn 属性插入您的任务</p>
-</blockquote>
-<p>上节拷贝 apk 的 task 是没法运行的,因为在 build 时, apk 可能还没有生成,所以更别谈 copy 了; <code>assemble</code> task 是生成 apk 的任务,所有我们依赖在这个任务上,就可以完成 copy apk 的任务;</p>
-<pre><code>task copyApks(type: Copy, dependsOn: assembleDebug) {
-        from(&quot;$buildDir/outputs/apk&quot;) {
-            exclude '**/*unsigned.apk', '**/*unaligned.apk'
-    }
-    into '../apks'
-}
-</code></pre>
-<p><code>dependsOn: assembleDebug</code> 使用 dependsOn 可以添加一个前置任务;<br>
-如果想要在每次 build 时,都 copy apk, 可以加入下例代码:<br>
-<code>build.dependsOn copyApks</code></p>
-<h3 id="常用内部任务类型task-types">常用内部任务类型(Task types)</h3>
-<h4 id="exec"><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html">Exec</a></h4>
-<pre><code>task stopTomcat(type:Exec) {
-  workingDir '../tomcat/bin'
-
-  //on windows:
-  commandLine 'cmd', '/c', 'stop.bat'
-
-  //on linux
-  commandLine './stop.sh'
-
-  //store the output instead of printing to the console:
-  standardOutput = new ByteArrayOutputStream()
-
-  //extension method stopTomcat.output() can be used to obtain the output:
-  ext.output = {
-    return standardOutput.toString()
-  }
-}
-</code></pre>
-<h4 id="copy"><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Copy.html">Copy</a></h4>
-<pre><code>task copyDocs(type: Copy) {
-    from 'src/main/doc'
-    into 'build/target/doc'
-}
-
-//for Ant filter
-import org.apache.tools.ant.filters.ReplaceTokens
-
-//for including in the copy task
-def dataContent = copySpec {
-    from 'src/data'
-    include '*.data'
-}
-
-task initConfig(type: Copy) {
-    from('src/main/config') {
-        include '**/*.properties'
-        include '**/*.xml'
-        filter(ReplaceTokens, tokens: [version: '2.3.1'])
-    }
-    from('src/main/config') {
-        exclude '**/*.properties', '**/*.xml'
-    }
-    from('src/main/languages') {
-        rename 'EN_US_(.*)', '$1'
-    }
-    into 'build/target/config'
-    exclude '**/*.bak'
-
-    includeEmptyDirs = false
-
-    with dataContent
-}
-</code></pre>
-<h4 id="delete"><a href="">Delete</a></h4>
-<pre><code>task makePretty(type: Delete) {
-  delete 'uglyFolder', 'uglyFile'
-  followSymlinks = true
-}
-</code></pre>
-<h3 id="task简写">task简写</h3>
-<pre><code>task hello &lt;&lt; {
-    println 'Hello world!'
-}
-</code></pre>
-<pre><code>task hello {
-    doLast{
-        println 'Hello world!'
-    }
-}
-</code></pre>
-<h3 id="task依赖">task依赖</h3>
-<pre><code>task taskX(dependsOn: 'taskY') {
-    doLast {
-        println 'taskX'
-    }
-}
-task taskY {
-    doLast {
-        println 'taskY'
-    }
-}
-</code></pre>
-<p><code>dependsOn</code> 指定依赖的任务,上述代码 <code>taskX</code> 依赖 <code>taskY</code>, 执行 <code>taskX</code> 时,会限制性 <code>taskY</code> 任务.<br>
-<code>&lt;&lt;</code>操作符为 <code>doLast</code> 简写;以上两种写法效果一样.</p>
+<p>统一中文文案、排版的相关用法，降低团队成员之间的沟通成本，增强网站气质。</p>
 <hr>
-<p>参考:<br>
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html">Gradle Task</a><br>
-https://docs.gradle.org/current/userguide/tutorial_using_tasks.html<br>
-<a href="https://docs.gradle.org/4.2.1/userguide/more_about_tasks.html#declareTask">more_about_tasks</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Gradle Java 项目构建（二）]]></title>
-        <id>https://raiseyang.github.io/post/gradle-java-xiang-mu-gou-jian-er/</id>
-        <link href="https://raiseyang.github.io/post/gradle-java-xiang-mu-gou-jian-er/">
-        </link>
-        <updated>2017-10-21T06:35:32.000Z</updated>
-        <content type="html"><![CDATA[<p>通过上一章的内容, 我们了解了 gradle 的基本结构, 这一章通过 Java 项目,更深入的了解.</p>
-<h2 id="创建项目文件结构">创建项目文件结构</h2>
-<p>创建一个 java-demo 项目</p>
-<pre><code>$ mkdir java-demo
-$ cd java-demo
-</code></pre>
-<p>使用 gradle 命令手动创建 Java 目录结构</p>
-<pre><code>$ gradle init --type java-application
-:wrapper
-:init
-
-BUILD SUCCESSFUL in 1s
-2 actionable tasks: 2 executed
-</code></pre>
-<p>构建成功后, 我们看一下目前 java-demo 的目录结构</p>
-<pre><code>│  build.gradle
-│  gradlew
-│  gradlew.bat
-│  settings.gradle
-│
-├─.gradle
-│  ...
-│
-├─gradle
-│  └─wrapper
-│          gradle-wrapper.jar
-│          gradle-wrapper.properties
-│
-└─src
-    ├─main
-    │  └─java
-    │          App.java
-    │
-    └─test
-        └─java
-                AppTest.java
-                
-</code></pre>
-<p><code>build.gradle</code> 为 gradle 脚本文件,每一个 project 都对应一个.<br>
-<code>setting.gradle</code>为 gradle setting 文件,该文件仅作为配置 project 使用. 目前我们就一个 project, 可以暂时不理会.<br>
-<code>src</code> 为 Java 源码目录, <code>main</code> 为主体代码区, <code>test</code> 为测试代码区.</p>
-<h2 id="buildgradle">build.gradle</h2>
+<h2 id="目录">目录</h2>
+<!-- vim-markdown-toc GFM -->
 <ul>
-<li>build.gradle</li>
+<li><a href="#%E7%A9%BA%E6%A0%BC">空格</a>
+<ul>
+<li><a href="#%E4%B8%AD%E8%8B%B1%E6%96%87%E4%B9%8B%E9%97%B4%E9%9C%80%E8%A6%81%E5%A2%9E%E5%8A%A0%E7%A9%BA%E6%A0%BC">中英文之间需要增加空格</a></li>
+<li><a href="#%E4%B8%AD%E6%96%87%E4%B8%8E%E6%95%B0%E5%AD%97%E4%B9%8B%E9%97%B4%E9%9C%80%E8%A6%81%E5%A2%9E%E5%8A%A0%E7%A9%BA%E6%A0%BC">中文与数字之间需要增加空格</a></li>
+<li><a href="#%E6%95%B0%E5%AD%97%E4%B8%8E%E5%8D%95%E4%BD%8D%E4%B9%8B%E9%97%B4%E6%97%A0%E9%9C%80%E5%A2%9E%E5%8A%A0%E7%A9%BA%E6%A0%BC">数字与单位之间无需增加空格</a></li>
+<li><a href="#%E5%85%A8%E8%A7%92%E6%A0%87%E7%82%B9%E4%B8%8E%E5%85%B6%E4%BB%96%E5%AD%97%E7%AC%A6%E4%B9%8B%E9%97%B4%E4%B8%8D%E5%8A%A0%E7%A9%BA%E6%A0%BC">全角标点与其他字符之间不加空格</a></li>
+<li><a href="#-ms-text-autospace-to-the-rescue"><code>-ms-text-autospace</code> to the rescue?</a></li>
 </ul>
-<pre><code>// Apply the java plugin to add support for Java
-apply plugin: 'java'
-
-// Apply the application plugin to add support for building an application
-apply plugin: 'application'
-
-// In this section you declare where to find the dependencies of your project
-repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-}
-
-dependencies {
-    // This dependency is found on compile classpath of this component and consumers.
-    compile 'com.google.guava:guava:21.0'
-
-    // Use JUnit test framework
-    testCompile 'junit:junit:4.12'
-}
-
-// Define the main class for the application
-mainClassName = 'App'
-</code></pre>
-<p><code>repositories</code> 配置一个仓库,所有的依赖都会去该仓库下载.<br>
-<code>dependencies</code> 配置该项目需要使用到的jar包<br>
-<code>mainClassName</code>, <code>main</code> 方法所在的入口类.<br>
-其他文件大家也可以看一下,不过因为增加了 <code>java</code>, <code>application</code> 插件,我们先一下现在有哪些任务可以执行:</p>
-<pre><code>$ gradle tasks
-:tasks
-
-------------------------------------------------------------
-All tasks runnable from root project
-------------------------------------------------------------
-
-Application tasks
------------------
-run - Runs this project as a JVM application
-
-Build tasks
------------
-assemble - Assembles the outputs of this project.
-build - Assembles and tests this project.
-buildDependents - Assembles and tests this project and all projects that depend on it.
-buildNeeded - Assembles and tests this project and all projects it depends on.
-classes - Assembles main classes.
-clean - Deletes the build directory.
-jar - Assembles a jar archive containing the main classes.
-testClasses - Assembles test classes.
-
-Build Setup tasks
------------------
-init - Initializes a new Gradle build.
-wrapper - Generates Gradle wrapper files.
-
-Distribution tasks
-------------------
-assembleDist - Assembles the main distributions
-distTar - Bundles the project as a distribution.
-distZip - Bundles the project as a distribution.
-installDist - Installs the project as a distribution as-is.
-
-Documentation tasks
--------------------
-javadoc - Generates Javadoc API documentation for the main source code.
-
-
-Verification tasks
-------------------
-check - Runs all checks.
-test - Runs the unit tests.
-
-BUILD SUCCESSFUL in 0s
-1 actionable task: 1 executed
-
-</code></pre>
-<h2 id="run">run</h2>
-<p>现有有这么多与 Java 项目相关的任务都可以执行.先执行 <code>run</code> 试试:</p>
-<pre><code>$ gradle run
-:compileJava
-:processResources NO-SOURCE
-:classes
-:run
-Hello world.
-
-BUILD SUCCESSFUL in 3s
-2 actionable tasks: 2 executed
-</code></pre>
-<p>从 gradle 控制台,我们可以发现 gradle 执行了 4 个任务,但我们只运行了一个 <code>run</code> 任务.<br>
-原来 gradle 中的 task 之间可以设置依赖关系, run 依赖 <code>classes</code>, <code>classes</code> 依赖 <code>processResourse</code> 和 <code>compileJava</code> 任务,所以被依赖的任务必须先完成才行.这和我们编译运行 Java 代码流程一致:先编译,再运行.</p>
-<pre><code class="language-graphLR">    A[:run] --&gt;B(:classes)
-    B --&gt;D[:compileJava]
-    B --&gt;E[:processResources]
-</code></pre>
-<p>想要了解更详细的 task 依赖关系可以参考: <a href="https://github.com/dorongold/gradle-task-tree">gradle-task-tree</a></p>
-<h2 id="build">build</h2>
-<p>使用 <code>build</code> 可以构建整个 Java 项目,将输出很多项目构建时产生的文件.</p>
-<pre><code>$ gradle build
-:compileJava
-:processResources NO-SOURCE
-:classes
-:jar
-:startScripts
-:distTar
-:distZip
-:assemble
-:compileTestJava
-:processTestResources NO-SOURCE
-:testClasses
-:test
-:check
-:build
-
-BUILD SUCCESSFUL in 2s
-7 actionable tasks: 7 executed
-
-</code></pre>
-<p>运行完成之后,将会在项目根目录下生成 <code>build</code> 目录.<br>
-该项目 <code>.jar</code> 文件存放在 <code>build/libs/</code> 目录下.<br>
-可以打开 <code>build\reports\tests\test\index.html</code> 文件查看测试报告.</p>
-<h2 id="打包-jar">打包 .jar</h2>
-<p>当前若只想打包 <code>.jar</code> 文件,只需要执行 <code>gradle jar</code> 即可. 但是这里需要注意打包出来的 jar 包是不能直接运行的, 想要打包可运行的 jar 需要在 build.gradle 中加入:</p>
-<pre><code>jar {
-    manifest {
-        attributes 'Main-Class': 'App'
-    }
-    archiveName &quot;java-demo.jar&quot;
-}
-</code></pre>
-<p>增加清单文件属性 'Main-class', 属性值为类的全包名 <code>com.raise.xxx.Main</code>.<br>
-<code>archiveName</code> 指定jar包的名称.<br>
-若注释有中文, 还需要指定编码:</p>
-<pre><code>tasks.withType(JavaCompile) {
-    options.encoding = &quot;UTF-8&quot;
-}
-</code></pre>
-<p>build 目录不需要我们手动删除,下次构建时会自动删除旧文件.若想清除 build, 可以使用 clean 命令.</p>
-<h2 id="clean">clean</h2>
-<pre><code>$ gradle clean
-:clean
-
-BUILD SUCCESSFUL in 0s
-1 actionable task: 1 executed
-
-</code></pre>
-<p>该命令将会删除当前 project 的 build 目录,若执行该任务失败,也可手动在磁盘上删除 build 目录,不会影响项目构建.</p>
-<hr>
-<p>参考:<br>
-https://guides.gradle.org/building-java-applications/</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Gradle 环境搭建（一）]]></title>
-        <id>https://raiseyang.github.io/post/gradle-huan-jing-da-jian/</id>
-        <link href="https://raiseyang.github.io/post/gradle-huan-jing-da-jian/">
-        </link>
-        <updated>2017-10-21T05:04:27.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="环境要求">环境要求</h2>
-<p>JDK 1.7+</p>
-<h2 id="安装">安装</h2>
-<ol>
-<li>去<a href="https://gradle.org/releases/">官方网站</a>下载最新版本,目前最新版本为<code>gradle-4.1-milestone-1</code>,下载地址: https://downloads.gradle.org/distributions/gradle-4.1-milestone-1.</li>
-<li>解压到 <code>D:</code> 目录下.</li>
-<li>配置 <code>GRADLE_HOME</code> 环境变量为:<code>D:\gradle-4.1-milestone-1</code>;并将<code>%GRADLE_HOME%\bin</code>添加到PATH中.</li>
-<li>打开命令行窗口,输入下例命令验证 gradle 配置.</li>
-</ol>
-<pre><code>PS D:\gradle-4.1-milestone-1&gt; gradle -v
-
-------------------------------------------------------------
-Gradle 4.1-milestone-1
-------------------------------------------------------------
-
-Build time:   2017-06-20 17:05:46 UTC
-Revision:     3ad5af92d482b963cc6b00fb5ad53b608606d657
-
-Groovy:       2.4.11
-Ant:          Apache Ant(TM) version 1.9.6 compiled on June 29 2015
-JVM:          1.8.0_112 (Oracle Corporation 25.112-b15)
-OS:           Windows 10 10.0 amd64
-
-PS D:\gradle-4.1-milestone-1&gt;
-</code></pre>
-<ol start="5">
-<li>若出现了上述信息,代表配置成功.</li>
-</ol>
-<h2 id="hello-world">Hello World!</h2>
-<p>新建 build.gradle 文件,并定义一个 task. <code>build.gradle</code> 文件位置: <code>/d/gradle-4.1-milestone-1/gradle-demo/build.gradle</code><br>
-运行 <code>gradle tasks</code> 即可查看该project下的所有任务:</p>
-<pre><code>/d/gradle-4.1-milestone-1/gradle-demo
-$ gradle tasks
-:tasks
-
-------------------------------------------------------------
-All tasks runnable from root project
-------------------------------------------------------------
-
-Build Setup tasks
------------------
-init - Initializes a new Gradle build.
-wrapper - Generates Gradle wrapper files.
-
-Help tasks
-----------
-buildEnvironment - Displays all buildscript dependencies declared in root project 'gradle-demo'.
-components - Displays the components produced by root project 'gradle-demo'. [incubating]
-dependencies - Displays all dependencies declared in root project 'gradle-demo'.
-dependencyInsight - Displays the insight into a specific dependency in root project 'gradle-demo'.
-dependentComponents - Displays the dependent components of components in root project 'gradle-demo'. [incubating]
-help - Displays a help message.
-model - Displays the configuration model of root project 'gradle-demo'. [incubating]
-projects - Displays the sub-projects of root project 'gradle-demo'.
-properties - Displays the properties of root project 'gradle-demo'.
-tasks - Displays the tasks runnable from root project 'gradle-demo'.
-
-To see all tasks and more detail, run gradle tasks --all
-
-To see more detail about a task, run gradle help --task &lt;task&gt;
-
-BUILD SUCCESSFUL in 0s
-1 actionable task: 1 executed
-</code></pre>
-<p>在build.gradle文件中,新建一个sayHello任务:</p>
-<pre><code>task sayHello {
-	doLast {
-		println 'Hello World!'
-	}
-}
-</code></pre>
-<p>运行sayHello任务,即可打印出Hello World!</p>
-<pre><code>$ gradle sayHello
-Starting a Gradle Daemon (subsequent builds will be faster)
-:sayHello
-Hello World!
-
-BUILD SUCCESSFUL in 3s
-1 actionable task: 1 executed
-
-</code></pre>
-<p><code>:syaHello</code> 为正在执行的任务名称.<br>
-<code>Hello World!</code> 为我们输出的字符串.</p>
-<h2 id="gradle-wapper">Gradle Wapper</h2>
-<p><code>Gradle Wapper</code> 可以使我们在没有安装gralde 的环境下运行 gradle, 而且可以很方便的更换 gradle 的版本.</p>
-<pre><code>$ gradle wrapper
-:wrapper
-
-BUILD SUCCESSFUL in 0s
-1 actionable task: 1 executed
-
-/d/gradle-4.1-milestone-1/gradle-demo
-$ ls
-build.gradle  gradle/  gradlew*  gradlew.bat
-</code></pre>
-<p><code>gradle/</code> 文件夹下为当前项目的配置文件,可以很方便的修改 gradle 的版本<br>
-<code>gradlew</code>, <code>gradlew.bat</code> 为 unix, windows 系统下的脚本文件, 可以直接运行 gradle 脚本.<br>
-比如运行上述 sayHello 任务(注意使用 <code>gradlew</code> ):</p>
-<pre><code>$ ./gradlew sayHello
-Downloading https://services.gradle.org/distributions/gradle-4.1-milestone-1-bin.zip
-</code></pre>
+</li>
+<li><a href="#%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7">标点符号</a>
+<ul>
+<li><a href="#%E4%B8%8D%E9%87%8D%E5%A4%8D%E4%BD%BF%E7%94%A8%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7">不重复使用标点符号</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%A8%E8%A7%92%E5%92%8C%E5%8D%8A%E8%A7%92">全角和半角</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%85%A8%E8%A7%92%E4%B8%AD%E6%96%87%E6%A0%87%E7%82%B9">使用全角中文标点</a></li>
+<li><a href="#%E6%95%B0%E5%AD%97%E4%BD%BF%E7%94%A8%E5%8D%8A%E8%A7%92%E5%AD%97%E7%AC%A6">数字使用半角字符</a></li>
+<li><a href="#%E9%81%87%E5%88%B0%E5%AE%8C%E6%95%B4%E7%9A%84%E8%8B%B1%E6%96%87%E6%95%B4%E5%8F%A5%E7%89%B9%E6%AE%8A%E5%90%8D%E8%AF%8D%E5%85%B6%E5%85%A7%E5%AE%B9%E4%BD%BF%E7%94%A8%E5%8D%8A%E8%A7%92%E6%A0%87%E7%82%B9">遇到完整的英文整句、特殊名词，其內容使用半角标点</a></li>
+</ul>
+</li>
+<li><a href="#%E5%90%8D%E8%AF%8D">名词</a>
+<ul>
+<li><a href="#%E4%B8%93%E6%9C%89%E5%90%8D%E8%AF%8D%E4%BD%BF%E7%94%A8%E6%AD%A3%E7%A1%AE%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%86%99">专有名词使用正确的大小写</a></li>
+<li><a href="#%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%9C%B0%E9%81%93%E7%9A%84%E7%BC%A9%E5%86%99">不要使用不地道的缩写</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%89%E8%AE%AE">争议</a>
+<ul>
+<li><a href="#%E9%93%BE%E6%8E%A5%E4%B9%8B%E9%97%B4%E5%A2%9E%E5%8A%A0%E7%A9%BA%E6%A0%BC">链接之间增加空格</a></li>
+<li><a href="#%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E7%9B%B4%E8%A7%92%E5%BC%95%E5%8F%B7">简体中文使用直角引号</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B7%A5%E5%85%B7">工具</a></li>
+<li><a href="#%E8%B0%81%E5%9C%A8%E8%BF%99%E6%A0%B7%E5%81%9A">谁在这样做？</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- vim-markdown-toc -->
+<h2 id="空格">空格</h2>
+<p>「有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。毕竟爱情跟书写都需要适时地留白。</p>
+<p>与大家共勉之。」——<a href="https://github.com/vinta/pangu.js">vinta/paranoid-auto-spacing</a></p>
+<h3 id="中英文之间需要增加空格">中英文之间需要增加空格</h3>
+<p>正确：</p>
 <blockquote>
-<p>注: 第一次运行, 将会下载 <code>PROJECT_ROOT/gradle/wrapper/gradle-wrapper.properties</code> 文件中配置的 gradle 版本,可能时间会比较长.</p>
+<p>在 LeanCloud 上，数据存储是围绕 <code>AVObject</code> 进行的。</p>
 </blockquote>
-<p>以后执行 gradle 指令就可以使用 <code>gradlew task_name</code>, 记得提前进入项目根目录.</p>
-<h2 id="运行一个核心任务core-task">运行一个核心任务(core task)</h2>
-<p>Gradle 内置了很多 type,供创建 task 时使用,比如 <code>Copy</code>, 他的作用是拷贝文件.<br>
-新建文件夹 src, 并在 src 下建立一个文件 hello.txt, 运行下述任务:</p>
-<pre><code>task copy(type: Copy) {
-    from 'src'
-    into 'dest'
-}
-</code></pre>
-<p>将会生成 dest 文件夹,并拷贝 hello.txt 文件至 dest 文件夹下.</p>
-<h2 id="使用-gradle-插件">使用 gradle 插件</h2>
-<p>目前我们项目只有最基础的 gradle 构建能力,并不能构建一个 Java 项目,或者 android 项目.</p>
-<pre><code>$ gradle tasks --all
-:tasks
-
-------------------------------------------------------------
-All tasks runnable from root project
-------------------------------------------------------------
-...
-
-Other tasks
------------
-copy
-sayHello
-
-BUILD SUCCESSFUL in 0s
-1 actionable task: 1 executed
-</code></pre>
-<p>只有我们定义的 2 个基础方法, 并且这两个方法对一个具体的项目没有什么作用.<br>
-那么如何构建一个 Java 项目的 gradle 呢, 这就使用的 gradle plugin 的概念. gradle plugin 中定义了众多任务,使得我们构建某个具体的项目变得简单.<br>
-比如 <code>java</code> 插件可以构建 Java 项目</p>
-<pre><code>plugins {
-    id 'java'
-}
-</code></pre>
-<p>我们再来看现在 gradle 有哪些任务:</p>
-<pre><code>$ gradle tasks --all
-:tasks
-
-------------------------------------------------------------
-All tasks runnable from root project
-------------------------------------------------------------
-
-Build tasks
------------
-assemble - Assembles the outputs of this project.
-build - Assembles and tests this project.
-buildDependents - Assembles and tests this project and all projects that depend on it.
-buildNeeded - Assembles and tests this project and all projects it depends on.
-classes - Assembles main classes.
-clean - Deletes the build directory.
-jar - Assembles a jar archive containing the main classes.
-testClasses - Assembles test classes.
-
-Build Setup tasks
------------------
-init - Initializes a new Gradle build.
-wrapper - Generates Gradle wrapper files.
-
-Documentation tasks
--------------------
-javadoc - Generates Javadoc API documentation for the main source code.
-
-Help tasks
-----------
-...
-
-Verification tasks
-------------------
-check - Runs all checks.
-test - Runs the unit tests.
-
-Other tasks
------------
-compileJava - Compiles main Java source.
-compileTestJava - Compiles test Java source.
-copy
-processResources - Processes main resources.
-processTestResources - Processes test resources.
-sayHello
-
-BUILD SUCCESSFUL in 2s
-1 actionable task: 1 executed
-</code></pre>
-<p><code>java</code> 插件内增加了 <code>Build Tasks</code> 任务集,里面的 <code>jar</code> 任务用来打包 jar 包, <code>assemble</code> 任务用来输出所有文件.</p>
+<p>错误：</p>
+<blockquote>
+<p>在LeanCloud上，数据存储是围绕<code>AVObject</code>进行的。</p>
+</blockquote>
+<blockquote>
+<p>在 LeanCloud上，数据存储是围绕<code>AVObject</code> 进行的。</p>
+</blockquote>
+<p>完整的正确用法：</p>
+<blockquote>
+<p>在 LeanCloud 上，数据存储是围绕 <code>AVObject</code> 进行的。每个 <code>AVObject</code> 都包含了与 JSON 兼容的 key-value 对应的数据。数据是 schema-free 的，你不需要在每个 <code>AVObject</code> 上提前指定存在哪些键，只要直接设定对应的 key-value 即可。</p>
+</blockquote>
+<p>例外：「豆瓣FM」等产品名词，按照官方所定义的格式书写。</p>
+<h3 id="中文与数字之间需要增加空格">中文与数字之间需要增加空格</h3>
+<p>正确：</p>
+<blockquote>
+<p>今天出去买菜花了 5000 元。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>今天出去买菜花了 5000元。</p>
+</blockquote>
+<blockquote>
+<p>今天出去买菜花了5000元。</p>
+</blockquote>
+<h3 id="数字与单位之间无需增加空格">数字与单位之间无需增加空格</h3>
+<p>正确：</p>
+<blockquote>
+<p>我家的光纤入户宽带有 10Gbps，SSD 一共有 10TB。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>我家的光纤入户宽带有 10 Gbps，SSD 一共有 20 TB。</p>
+</blockquote>
+<p>另外，度／百分比与数字之间不需要增加空格：</p>
+<p>正确：</p>
+<blockquote>
+<p>今天是 233° 的高温。</p>
+</blockquote>
+<blockquote>
+<p>新 MacBook Pro 有 15% 的 CPU 性能提升。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>今天是 233 ° 的高温。</p>
+</blockquote>
+<blockquote>
+<p>新 MacBook Pro 有 15 % 的 CPU 性能提升。</p>
+</blockquote>
+<h3 id="全角标点与其他字符之间不加空格">全角标点与其他字符之间不加空格</h3>
+<p>正确：</p>
+<blockquote>
+<p>刚刚买了一部 iPhone，好开心！</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>刚刚买了一部 iPhone ，好开心！</p>
+</blockquote>
+<h3 id="-ms-text-autospace-to-the-rescue"><code>-ms-text-autospace</code> to the rescue?</h3>
+<p>Microsoft 有个 <a href="http://msdn.microsoft.com/en-us/library/ie/ms531164(v=vs.85).aspx"><code>-ms-text-autospace</code></a> 的 CSS 属性可以实现自动为中英文之间增加空白。不过目前并未普及，另外在其他应用场景，例如 OS X、iOS 的用户界面目前并不存在这个特性，所以请继续保持随手加空格的习惯。</p>
+<h2 id="标点符号">标点符号</h2>
+<h3 id="不重复使用标点符号">不重复使用标点符号</h3>
+<p>正确：</p>
+<blockquote>
+<p>德国队竟然战胜了巴西队！</p>
+</blockquote>
+<blockquote>
+<p>她竟然对你说「喵」？！</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>德国队竟然战胜了巴西队！！</p>
+</blockquote>
+<blockquote>
+<p>德国队竟然战胜了巴西队！！！！！！！！</p>
+</blockquote>
+<blockquote>
+<p>她竟然对你说「喵」？？！！</p>
+</blockquote>
+<blockquote>
+<p>她竟然对你说「喵」？！？！？？！！</p>
+</blockquote>
+<h2 id="全角和半角">全角和半角</h2>
+<p>不明白什么是全角（全形）与半角（半形）符号？请查看维基百科词条『<a href="http://zh.wikipedia.org/wiki/%E5%85%A8%E5%BD%A2%E5%92%8C%E5%8D%8A%E5%BD%A2">全角和半角</a>』。</p>
+<h3 id="使用全角中文标点">使用全角中文标点</h3>
+<p>正确：</p>
+<blockquote>
+<p>嗨！你知道嘛？今天前台的小妹跟我说「喵」了哎！</p>
+</blockquote>
+<blockquote>
+<p>核磁共振成像（NMRI）是什么原理都不知道？JFGI！</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>嗨! 你知道嘛? 今天前台的小妹跟我说 &quot;喵&quot; 了哎!</p>
+</blockquote>
+<blockquote>
+<p>嗨!你知道嘛?今天前台的小妹跟我说&quot;喵&quot;了哎!</p>
+</blockquote>
+<blockquote>
+<p>核磁共振成像 (NMRI) 是什么原理都不知道? JFGI!</p>
+</blockquote>
+<blockquote>
+<p>核磁共振成像(NMRI)是什么原理都不知道?JFGI!</p>
+</blockquote>
+<h3 id="数字使用半角字符">数字使用半角字符</h3>
+<p>正确：</p>
+<blockquote>
+<p>这件蛋糕只卖 1000 元。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>这件蛋糕只卖 １０００ 元。</p>
+</blockquote>
+<p>例外：在设计稿、宣传海报中如出现极少量数字的情形时，为方便文字对齐，是可以使用全角数字的。</p>
+<h3 id="遇到完整的英文整句-特殊名词其內容使用半角标点">遇到完整的英文整句、特殊名词，其內容使用半角标点</h3>
+<p>正确：</p>
+<blockquote>
+<p>乔布斯那句话是怎么说的？「Stay hungry, stay foolish.」</p>
+</blockquote>
+<blockquote>
+<p>推荐你阅读《Hackers &amp; Painters: Big Ideas from the Computer Age》，非常的有趣。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>乔布斯那句话是怎么说的？「Stay hungry，stay foolish。」</p>
+</blockquote>
+<blockquote>
+<p>推荐你阅读《Hackers＆Painters：Big Ideas from the Computer Age》，非常的有趣。</p>
+</blockquote>
+<h2 id="名词">名词</h2>
+<h3 id="专有名词使用正确的大小写">专有名词使用正确的大小写</h3>
+<p>大小写相关用法原属于英文书写范畴，不属于本 wiki 讨论內容，在这里只对部分易错用法进行简述。</p>
+<p>正确：</p>
+<blockquote>
+<p>使用 GitHub 登录</p>
+</blockquote>
+<blockquote>
+<p>我们的客户有 GitHub、Foursquare、Microsoft Corporation、Google、Facebook, Inc.。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>使用 github 登录</p>
+</blockquote>
+<blockquote>
+<p>使用 GITHUB 登录</p>
+</blockquote>
+<blockquote>
+<p>使用 Github 登录</p>
+</blockquote>
+<blockquote>
+<p>使用 gitHub 登录</p>
+</blockquote>
+<blockquote>
+<p>使用 gｲんĤЦ8 登录</p>
+</blockquote>
+<blockquote>
+<p>我们的客户有 github、foursquare、microsoft corporation、google、facebook, inc.。</p>
+</blockquote>
+<blockquote>
+<p>我们的客户有 GITHUB、FOURSQUARE、MICROSOFT CORPORATION、GOOGLE、FACEBOOK, INC.。</p>
+</blockquote>
+<blockquote>
+<p>我们的客户有 Github、FourSquare、MicroSoft Corporation、Google、FaceBook, Inc.。</p>
+</blockquote>
+<blockquote>
+<p>我们的客户有 gitHub、fourSquare、microSoft Corporation、google、faceBook, Inc.。</p>
+</blockquote>
+<blockquote>
+<p>我们的客户有 gｲんĤЦ8、ｷouЯƧquﾑгє、๓เςг๏ร๏Ŧt ς๏гק๏гคtเ๏ภn、900913、ƒ4ᄃëв๏๏к, IПᄃ.。</p>
+</blockquote>
+<p>注意：当网页中需要配合整体视觉风格而出现全部大写／小写的情形，HTML 中请使用标准的大小写规范进行书写；并通过 <code>text-transform: uppercase;</code>／<code>text-transform: lowercase;</code> 对表现形式进行定义。</p>
+<h3 id="不要使用不地道的缩写">不要使用不地道的缩写</h3>
+<p>正确：</p>
+<blockquote>
+<p>我们需要一位熟悉 JavaScript、HTML5，至少理解一种框架（如 Backbone.js、AngularJS、React 等）的前端开发者。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>我们需要一位熟悉 Js、h5，至少理解一种框架（如 backbone、angular、RJS 等）的 FED。</p>
+</blockquote>
+<h2 id="争议">争议</h2>
+<p>以下用法略带有个人色彩，即：无论是否遵循下述规则，从语法的角度来讲都是<strong>正确</strong>的。</p>
+<h3 id="链接之间增加空格">链接之间增加空格</h3>
+<p>用法：</p>
+<blockquote>
+<p>请 <a href="#">提交一个 issue</a> 并分配给相关同事。</p>
+</blockquote>
+<blockquote>
+<p>访问我们网站的最新动态，请 <a href="#">点击这里</a> 进行订阅！</p>
+</blockquote>
+<p>对比用法：</p>
+<blockquote>
+<p>请<a href="#">提交一个 issue</a> 并分配给相关同事。</p>
+</blockquote>
+<blockquote>
+<p>访问我们网站的最新动态，请<a href="#">点击这里</a>进行订阅！</p>
+</blockquote>
+<h3 id="简体中文使用直角引号">简体中文使用直角引号</h3>
+<p>用法：</p>
+<blockquote>
+<p>「老师，『有条不紊』的『紊』是什么意思？」</p>
+</blockquote>
+<p>对比用法：</p>
+<blockquote>
+<p>“老师，‘有条不紊’的‘紊’是什么意思？”</p>
+</blockquote>
+<h2 id="工具">工具</h2>
+<table>
+<thead>
+<tr>
+<th>仓库</th>
+<th>语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/vinta/paranoid-auto-spacing">vinta/paranoid-auto-spacing</a></td>
+<td>JavaScript</td>
+</tr>
+<tr>
+<td><a href="https://github.com/huei90/pangu.node">huei90/pangu.node</a></td>
+<td>Node.js</td>
+</tr>
+<tr>
+<td><a href="https://github.com/huacnlee/auto-correct">huacnlee/auto-correct</a></td>
+<td>Ruby</td>
+</tr>
+<tr>
+<td><a href="https://github.com/sparanoid/space-lover">sparanoid/space-lover</a></td>
+<td>PHP (WordPress)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/NauxLiu/auto-correct">nauxliu/auto-correct</a></td>
+<td>PHP</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ricoa/copywriting-correct">ricoa/copywriting-correct</a></td>
+<td>PHP</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hotoo/pangu.vim">hotoo/pangu.vim</a></td>
+<td>Vim</td>
+</tr>
+<tr>
+<td><a href="https://github.com/sparanoid/grunt-auto-spacing">sparanoid/grunt-auto-spacing</a></td>
+<td>Node.js (Grunt)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hjiang/scripts/blob/master/add-space-between-latin-and-cjk">hjiang/scripts/add-space-between-latin-and-cjk</a></td>
+<td>Python</td>
+</tr>
+</tbody>
+</table>
+<h2 id="谁在这样做">谁在这样做？</h2>
+<table>
+<thead>
+<tr>
+<th>网站</th>
+<th>文案</th>
+<th>UGC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.apple.com/cn/">Apple 中国</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.apple.com/hk/">Apple 香港</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.apple.com/tw/">Apple 台湾</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.microsoft.com/zh-cn/">Microsoft 中国</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.microsoft.com/zh-hk/">Microsoft 香港</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.microsoft.com/zh-tw/">Microsoft 台湾</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://leancloud.cn/">LeanCloud</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://www.zhihu.com/">知乎</a></td>
+<td>Yes</td>
+<td>部分用户达成</td>
+</tr>
+<tr>
+<td><a href="https://www.v2ex.com/">V2EX</a></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://segmentfault.com/">SegmentFault</a></td>
+<td>Yes</td>
+<td>部分用户达成</td>
+</tr>
+<tr>
+<td><a href="http://apple4us.com/">Apple4us</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://www.wandoujia.com/">豌豆荚</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://ruby-china.org/">Ruby China</a></td>
+<td>Yes</td>
+<td>标题达成</td>
+</tr>
+<tr>
+<td><a href="https://phphub.org/">PHPHub</a></td>
+<td>Yes</td>
+<td>标题达成</td>
+</tr>
+<tr>
+<td><a href="http://sspai.com/">少数派</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://leetcode-cn.com/">力扣 LeetCode</a></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li><a href="http://grammar.about.com/od/punctuationandmechanics/a/Guidelines-For-Using-Capital-Letters.htm">Guidelines for Using Capital Letters</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Letter_case">Letter case - Wikipedia</a></li>
+<li><a href="http://www.oxforddictionaries.com/words/punctuation">Punctuation - Oxford Dictionaries</a></li>
+<li><a href="https://owl.english.purdue.edu/owl/section/1/6/">Punctuation - The Purdue OWL</a></li>
+<li><a href="http://www.wikihow.com/Use-English-Punctuation-Correctly">How to Use English Punctuation Corrently - wikiHow</a></li>
+<li><a href="https://zh.opensuse.org/index.php?title=Help:%E6%A0%BC%E5%BC%8F">格式 - openSUSE</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%85%A8%E5%BD%A2%E5%92%8C%E5%8D%8A%E5%BD%A2">全角和半角 - 维基百科</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%BC%95%E8%99%9F">引号 - 维基百科</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E7%96%91%E5%95%8F%E9%A9%9A%E5%98%86%E8%99%9F">疑问惊叹号 - 维基百科</a></li>
+</ul>
 ]]></content>
     </entry>
 </feed>
